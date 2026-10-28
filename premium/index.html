@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Proline Logistics · Le quai, l'entrepôt, la route (maquette premium)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0b1620;--ink:#11202e;--ink2:#172b3c;--steel:#3a5a72;--or:#ee5b22;--or2:#ff7a45;--paper:#f3f5f7;--line:rgba(255,255,255,.12);--mut:#93a7b8;--ease:cubic-bezier(.2,.7,.1,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{font-family:Inter,system-ui,sans-serif;background:var(--night);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.55}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+h1,h2,h3,h4,.sg{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1}
+.eye{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--or);display:flex;align-items:center;gap:12px}
+.eye:before{content:"";width:28px;height:2px;background:var(--or)}
+.demo{position:relative;z-index:70;background:#000;color:#fff;font-size:12px;text-align:center;padding:0 12px;height:28px;line-height:28px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* nav */
+.nav{position:fixed;left:0;right:0;top:28px;z-index:60;transition:.4s var(--ease)}
+.nav.s{top:0;background:rgba(11,22,32,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
+.nav img{height:46px;width:auto}
+.nav ul{display:flex;gap:34px;list-style:none;font-size:14px;color:rgba(255,255,255,.78)}
+.nav ul a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:15px;padding:16px 26px;border-radius:999px;transition:.35s var(--ease);cursor:pointer;border:0;font-family:inherit}
+.btn svg{width:18px;height:18px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.b-or{background:var(--or);color:#fff}.b-or:hover{background:var(--or2)}
+.b-gl{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px)}.b-gl:hover{background:#fff;color:var(--ink)}
+.b-sm{padding:12px 20px;font-size:14px}
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero .bg{position:absolute;inset:-6% 0 0;background:url(assets/port-abidjan-navire.jpg) center 60%/cover;transform:scale(1.08);animation:zoom 18s var(--ease) forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,22,32,.55) 0%,rgba(11,22,32,.25) 35%,rgba(11,22,32,.92) 82%,var(--night) 100%)}
+.hero .in{position:relative;z-index:2;width:100%;padding:150px 0 64px}
+.hero h1{font-size:clamp(52px,8.6vw,138px);font-weight:500;max-width:1100px;margin:22px 0 0}
+.hero h1 .l{display:block;overflow:hidden}
+.hero h1 .l span{display:inline-block;transform:translateY(105%);animation:up 1.1s var(--ease) forwards}
+.hero h1 .l:nth-child(2) span{animation-delay:.12s}.hero h1 .l:nth-child(3) span{animation-delay:.24s}
+.hero h1 em{font-style:normal;color:var(--or)}
+@keyframes up{to{transform:none}}
+.hero .row{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:40px;flex-wrap:wrap}
+.hero p{max-width:470px;font-size:18px;color:rgba(255,255,255,.8);opacity:0;animation:fade 1s .6s forwards}
+.hero .ctas{display:flex;gap:12px;opacity:0;animation:fade 1s .75s forwards;flex-wrap:wrap}
+@keyframes fade{to{opacity:1}}
+.hero .stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:54px;border-top:1px solid var(--line)}
+.hero .stats div{padding:24px 24px 0 0}
+.hero .stats b{font-family:"Space Grotesk";font-size:clamp(28px,3vw,42px);font-weight:500}
+.hero .stats small{display:block;color:var(--mut);font-size:13px;margin-top:4px}
+.credit{position:absolute;right:32px;top:130px;z-index:2;font-size:10px;color:rgba(255,255,255,.45);writing-mode:vertical-rl}
+/* marquee */
+.mq{border-block:1px solid var(--line);overflow:hidden;padding:26px 0;background:var(--night)}
+.mq .t{display:flex;gap:64px;width:max-content;animation:mq 38s linear infinite}
+.mq span{font-family:"Space Grotesk";font-size:26px;font-weight:500;color:rgba(255,255,255,.42);white-space:nowrap;display:flex;align-items:center;gap:64px}
+.mq span:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--or)}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:130px 0;position:relative}
+.h2{font-size:clamp(40px,5.4vw,82px);font-weight:500;margin-top:20px}
+.h2 em{font-style:normal;color:var(--or)}
+.lead{color:var(--mut);font-size:18px;max-width:460px}
+/* manifeste */
+.mani .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.mani .big{font-family:"Space Grotesk";font-size:clamp(28px,2.8vw,40px);line-height:1.18;font-weight:400;letter-spacing:-.02em}
+.mani .big b{color:var(--or);font-weight:500}
+/* services tabs */
+.svc{background:var(--paper);color:var(--ink)}
+.svc .lead{color:#5f7488}
+.tabs{display:grid;grid-template-columns:380px 1fr;gap:56px;margin-top:64px}
+.tl button{all:unset;cursor:pointer;display:block;width:100%;padding:24px 0;border-top:1px solid #d5dde4;transition:.3s}
+.tl button:last-child{border-bottom:1px solid #d5dde4}
+.tl button small{display:block;font-size:12px;font-weight:700;color:#8ea0b0;letter-spacing:.14em}
+.tl button span{font-family:"Space Grotesk";font-size:28px;font-weight:500;letter-spacing:-.02em;color:#8ea0b0;transition:.3s}
+.tl button.on span,.tl button:hover span{color:var(--ink)}
+.tl button.on small{color:var(--or)}
+.tp{display:none;grid-template-columns:1.1fr 1fr;gap:36px;animation:fade .6s}
+.tp.on{display:grid}
+.tp img{border-radius:22px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.tp h3{font-size:36px;font-weight:500;margin-bottom:16px}
+.tp p{color:#5f7488}
+.tp ul{list-style:none;margin-top:26px;display:grid;gap:0}
+.tp li{padding:14px 0;border-top:1px solid #d5dde4;display:flex;justify-content:space-between;gap:14px;font-size:15px}
+.tp li b{font-family:"Space Grotesk";font-weight:600;color:var(--or);white-space:nowrap}
+/* flux */
+.flux .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:70px;counter-reset:s}
+.st{border:1px solid var(--line);border-radius:20px;padding:28px 22px;min-height:260px;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);transition:.4s var(--ease)}
+.st:hover{border-color:var(--or);transform:translateY(-6px)}
+.st .ic{width:52px;height:52px;border-radius:14px;background:rgba(238,91,34,.14);color:var(--or);display:grid;place-items:center}
+.st .ic svg{width:26px;height:26px}
+.st:before{counter-increment:s;content:"0" counter(s);font-family:"Space Grotesk";font-size:13px;color:var(--mut);margin-bottom:18px}
+.st h4{font-size:22px;font-weight:500;margin:22px 0 10px}
+.st p{color:var(--mut);font-size:14px;margin-top:auto}
+/* chiffres */
+.nums .g{display:grid;grid-template-columns:repeat(3,1fr);margin-top:70px}
+.nums .g div{padding:40px 30px 40px 0;border-top:1px solid var(--line)}
+.nums b{font-family:"Space Grotesk";font-size:clamp(54px,6.4vw,104px);font-weight:400;letter-spacing:-.05em;display:flex;align-items:baseline;gap:8px}
+.nums b i{font-style:normal;font-size:.32em;color:var(--or);letter-spacing:0}
+.nums span{color:var(--mut);display:block;margin-top:8px}
+.note{font-size:12px;color:#6f8597;margin-top:26px}
+/* parcs carte */
+.parcs{background:var(--ink)}
+.pg{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;margin-top:64px;align-items:stretch}
+.map{position:relative;border-radius:26px;overflow:hidden;background:#0e1c28;border:1px solid var(--line);min-height:520px}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{cursor:pointer}
+.pin circle.c{fill:var(--ink);stroke:var(--or);stroke-width:3;transition:.3s}
+.pin.on circle.c,.pin:hover circle.c{fill:var(--or)}
+.pin circle.p{fill:var(--or);opacity:.35;transform-box:fill-box;transform-origin:center;animation:pulse 2.4s infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.5}100%{transform:scale(2.4);opacity:0}}
+.pin text{fill:#fff;font-family:"Space Grotesk";font-size:15px;font-weight:600}
+.mapnote{position:absolute;left:18px;bottom:14px;font-size:11px;color:#6f8597}
+.pl{display:grid;gap:12px}
+.pc{all:unset;cursor:pointer;display:block;border:1px solid var(--line);border-radius:20px;padding:24px 26px;transition:.35s var(--ease)}
+.pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pc small{font-size:12px;letter-spacing:.14em;color:var(--or);font-weight:700}
+.pc h3{font-size:26px;font-weight:500;margin-top:6px}
+.pc .sz{font-family:"Space Grotesk";font-size:24px;color:#fff}
+.pc ul{list-style:none;display:none;margin-top:16px;color:var(--mut);font-size:14px;gap:6px}
+.pc.on{background:rgba(238,91,34,.1);border-color:var(--or)}
+.pc.on ul{display:grid}
+/* galerie */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:64px}
+.gal figure{position:relative;border-radius:22px;overflow:hidden;height:380px}
+.gal figure:nth-child(1){grid-column:span 7}.gal figure:nth-child(2){grid-column:span 5}
+.gal figure:nth-child(3){grid-column:span 4}.gal figure:nth-child(4){grid-column:span 4}.gal figure:nth-child(5){grid-column:span 4}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:60px 22px 20px;background:linear-gradient(transparent,rgba(11,22,32,.9));font-family:"Space Grotesk";font-size:20px;font-weight:500}
+.gal figcaption small{display:block;font-family:Inter;font-size:12px;color:var(--mut);font-weight:400}
+/* parcours horizontal */
+.hist .track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:64px;padding-bottom:18px;scrollbar-width:thin;scrollbar-color:var(--or) transparent}
+.yr{flex:0 0 300px;scroll-snap-align:start;border-left:2px solid var(--or);padding:6px 26px 6px 22px}
+.yr b{font-family:"Space Grotesk";font-size:64px;font-weight:400;letter-spacing:-.04em;color:rgba(255,255,255,.9)}
+.yr p{color:var(--mut);margin-top:10px}
+/* clients + qhse */
+.cl{background:var(--paper);color:var(--ink)}
+.lg{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid #d5dde4;border-top:1px solid #d5dde4;margin-top:60px}
+.lg div{border-right:1px solid #d5dde4;border-bottom:1px solid #d5dde4;height:120px;display:grid;place-items:center;font-family:"Space Grotesk";font-size:22px;font-weight:600;color:#7a8da0;transition:.3s;text-align:center;padding:10px}
+.lg div:hover{background:#fff;color:var(--ink)}
+.q3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.q3 div{background:#fff;border-radius:18px;padding:26px;border:1px solid #e1e7ec}
+.q3 b{font-family:"Space Grotesk";font-size:24px;font-weight:600}
+.q3 p{color:#5f7488;font-size:14px;margin-top:6px}
+.sect{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.sect span{border:1px solid #cfd8e0;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500}
+/* cta + form */
+.cta{padding:0}
+.cta .box{position:relative;border-radius:32px;overflow:hidden;padding:90px 70px;background:url(assets/port-abidjan-camions.jpg) center/cover}
+.cta .box:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,22,32,.96) 35%,rgba(238,91,34,.55))}
+.cta .in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cta h2{font-size:clamp(40px,4.6vw,70px);font-weight:500}
+.cta .co{margin-top:34px;display:grid;gap:14px;color:rgba(255,255,255,.85)}
+.cta .co a,.cta .co div{display:flex;gap:12px;align-items:center}
+.cta .co svg{width:20px;height:20px;color:var(--or);flex:none}
+form{background:rgba(11,22,32,.72);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form .f{grid-column:1/-1}
+label{font-size:12px;font-weight:600;color:var(--mut);display:grid;gap:7px;letter-spacing:.04em}
+input,select,textarea{font:inherit;font-size:15px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:14px}
+select option{color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--or)}
+textarea{min-height:110px;resize:vertical}
+.ok{display:none;grid-column:1/-1;background:rgba(46,160,90,.18);border:1px solid rgba(46,160,90,.5);color:#bff0cf;border-radius:12px;padding:14px;font-size:14px}
+form small{grid-column:1/-1;font-size:12px;color:#7d92a4}
+/* footer */
+footer{padding:110px 0 30px;overflow:hidden}
+.fbig{overflow:hidden;font-family:"Space Grotesk";font-size:clamp(40px,8.6vw,124px);font-weight:500;letter-spacing:-.06em;line-height:.85;color:rgba(255,255,255,.07);margin-bottom:60px;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;font-size:14px;color:var(--mut)}
+footer img{height:50px;width:auto;margin-bottom:18px}
+footer h4{color:#fff;font-size:15px;font-weight:500;margin-bottom:16px}
+footer li{list-style:none;margin-bottom:10px}
+footer a:hover{color:#fff}
+.soc{display:flex;gap:10px;margin-top:20px}
+.soc a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:#fff;transition:.3s}
+.soc a:hover{background:var(--or);border-color:var(--or)}
+.soc svg{width:18px;height:18px}
+.legal{border-top:1px solid var(--line);margin-top:60px;padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:#6f8597}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+@media(max-width:1020px){
+ .nav ul{display:none}.mani .wrap,.tabs,.tp,.pg,.cta .in{grid-template-columns:1fr}
+ .flux .steps{grid-template-columns:1fr 1fr}.nums .g{grid-template-columns:1fr 1fr}.hero .stats{grid-template-columns:1fr 1fr}
+ .gal figure{grid-column:span 12!important;height:280px}.lg{grid-template-columns:repeat(2,1fr)}.q3{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}
+ .cta .box{padding:50px 26px}.map{min-height:380px}.credit{display:none}
+}
+@media(max-width:560px){.hero:after{background:linear-gradient(180deg,rgba(11,22,32,.75),rgba(11,22,32,.6) 40%,rgba(11,22,32,.95) 80%,var(--night))}.eye{font-size:10px;letter-spacing:.18em}.nav .wrap{height:70px}.nav img{height:38px}.wrap{padding:0 20px}.flux .steps,.nums .g,form,.fg{grid-template-columns:1fr}section{padding:90px 0}.nav .b-or{display:none}}
+</style>
+</head>
+<body>
+<div class="demo">Maquette de proposition · version premium · non publiée par Proline Logistics</div>
+<header class="nav" id="nav"><div class="wrap">
+ <a href="#"><img src="assets/logo-clair.png" alt="Proline Logistics"></a>
+ <ul><li><a href="#metiers">Métiers</a></li><li><a href="#flux">Votre flux</a></li><li><a href="#parcs">Parcs</a></li><li><a href="#histoire">Histoire</a></li><li><a href="#clients">Références</a></li></ul>
+ <a class="btn b-or b-sm" href="#contact">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+</div></header>
+
+<section class="hero" style="padding:0">
+ <div class="bg" role="img" aria-label="Porte-conteneurs à quai au port d'Abidjan"></div>
+ <span class="credit">Port d'Abidjan · photo Farid Mernissi, CC BY-SA 4.0</span>
+ <div class="in"><div class="wrap">
+  <div class="eye">Logisticien 3PL · Abidjan depuis 2013</div>
+  <h1><span class="l"><span>Du quai</span></span><span class="l"><span>à l'entrepôt,</span></span><span class="l"><span><em>maîtrisé.</em></span></span></h1>
+  <div class="row">
+   <p>Transport, entreposage et gestion de stock pour les industriels et les armateurs, avec quatre parcs à Abidjan et des moyens détenus en propre.</p>
+   <div class="ctas"><a class="btn b-or" href="#contact">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a><a class="btn b-gl" href="#parcs">Visiter nos parcs</a></div>
+  </div>
+  <div class="stats">
+   <div><b class="cnt" data-n="113500">113 500</b><small>m² de surface totale</small></div>
+   <div><b class="cnt" data-n="40000">40 000</b><small>EVP transportés par an</small></div>
+   <div><b class="cnt" data-n="265">265</b><small>tracteurs et remorques</small></div>
+   <div><b class="cnt" data-n="4">4</b><small>parcs logistiques</small></div>
+  </div>
+ </div></div>
+</section>
+
+<div class="mq"><div class="t">
+ <span>Maersk</span><span>CMA CGM</span><span>Nestlé</span><span>TotalEnergies</span><span>Hapag-Lloyd</span><span>Cargill</span><span>CEVA Logistics</span><span>SAPH</span><span>Sania</span><span>Barry Callebaut</span><span>FrieslandCampina</span><span>MEDLOG</span>
+ <span>Maersk</span><span>CMA CGM</span><span>Nestlé</span><span>TotalEnergies</span><span>Hapag-Lloyd</span><span>Cargill</span><span>CEVA Logistics</span><span>SAPH</span><span>Sania</span><span>Barry Callebaut</span><span>FrieslandCampina</span><span>MEDLOG</span>
+</div></div>
+
+<section class="mani"><div class="wrap">
+ <div class="rv"><div class="eye">Qui nous sommes</div><h2 class="h2">Un seul interlocuteur pour <em>toute</em> la chaîne.</h2></div>
+ <p class="big rv d2">Depuis 2013, Proline Logistics conçoit et opère des solutions intégrées alliant <b>performance, transparence et innovation</b>. Flotte, chariots, entrepôts et logiciels métier : l'essentiel est à nous, et chaque flux se mesure.</p>
+</div></section>
+
+<section class="svc" id="metiers"><div class="wrap">
+ <div class="rv"><div class="eye">Nos métiers</div><h2 class="h2">Deux métiers, une seule chaîne.</h2></div>
+ <div class="tabs">
+  <div class="tl rv">
+   <button class="on" data-t="0"><small>01</small><span>Transport</span></button>
+   <button data-t="1"><small>02</small><span>Entreposage et stock</span></button>
+   <button data-t="2"><small>03</small><span>Technologie et équipes</span></button>
+  </div>
+  <div class="rv d2">
+   <div class="tp on"><img src="assets/transport-citerne.jpg" alt="Camion-citerne Proline"><div><h3>Du conteneur au hors-gabarit.</h3><p>Acheminement de vos marchandises sur les corridors d'Afrique de l'Ouest, avec suivi GPS et reporting en temps réel.</p>
+    <ul><li>Transport de conteneurs<b>40 000 EVP / an</b></li><li>Transport d'hydrocarbures<b>80 000 m³ / an</b></li><li>Colis hors-gabarit et charges exceptionnelles<b>›</b></li><li>Distribution à la palette ou au colis<b>›</b></li></ul></div></div>
+   <div class="tp"><img src="assets/entrepot-rack.jpg" alt="Entrepôt racké"><div><h3>De la réception à l'expédition.</h3><p>Une infrastructure sécurisée et une gestion inventoriée pilotée par WMS, avec traçabilité de bout en bout.</p>
+    <ul><li>Entrepôts équipés de racks<b>43 000 m²</b></li><li>Terre-plein<b>70 000 m²</b></li><li>Places palettes au hub aéroportuaire<b>7 000</b></li><li>Picking, FIFO / FEFO, inventaire croisé<b>Rapport journalier</b></li></ul></div></div>
+   <div class="tp"><img src="assets/gestion-stock-cariste.jpg" alt="Cariste en opération"><div><h3>Des outils et des gens formés.</h3><p>Un système d'information dédié et des équipes en formation continue sur la sécurité et les procédures clients.</p>
+    <ul><li>TMS · WMS · GMAO · tracking<b>Logiciels métier</b></li><li>Chariots élévateurs, 2,5 à 45 tonnes<b>30</b></li><li>Caristes, magasiniers, chauffeurs<b>CACES</b></li><li>Département QHSE<b>Toutes procédures</b></li></ul></div></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="flux" id="flux"><div class="wrap">
+ <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Votre flux</div><h2 class="h2">Le trajet de votre marchandise.</h2></div><p class="lead">Chaque étape est prise en charge par nos moyens et suivie dans nos outils, du déchargement à la livraison.</p></div>
+ <div class="steps">
+  <div class="st rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17h18l-2 4H5zM6 17V9h12v8M9 9V5h6v4"/></svg></div><h4>Prise en charge</h4><p>Au port, à l'aéroport ou chez vous : conteneur, citerne ou colis hors-gabarit.</p></div>
+  <div class="st rv d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h12v10H2zM14 10h4l3 3v4h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><h4>Transport suivi</h4><p>Suivi GPS et reporting en temps réel sur tout le trajet.</p></div>
+  <div class="st rv d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><h4>Réception contrôlée</h4><p>Déchargement, contrôle qualité et quantité, mise en stock.</p></div>
+  <div class="st rv d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V8l9-5 9 5v13M7 21v-8h10v8M7 17h10"/></svg></div><h4>Stock piloté</h4><p>WMS, FIFO / FEFO, inventaire croisé et rapport journalier.</p></div>
+  <div class="st rv d4"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg></div><h4>Préparation et livraison</h4><p>Picking, préparation de commande, distribution palette ou colis.</p></div>
+ </div>
+</div></section>
+
+<section class="nums" style="padding-top:40px"><div class="wrap">
+ <div class="rv"><div class="eye">En chiffres</div><h2 class="h2">Des moyens à la mesure <em>de vos volumes.</em></h2></div>
+ <div class="g">
+  <div class="rv"><b><span class="cnt" data-n="43000">43 000</span><i>m²</i></b><span>d'entrepôts rackés</span></div>
+  <div class="rv d1"><b><span class="cnt" data-n="70000">70 000</span><i>m²</i></b><span>de terre-plein</span></div>
+  <div class="rv d2"><b><span class="cnt" data-n="80000">80 000</span><i>m³</i></b><span>d'hydrocarbures transportés par an</span></div>
+  <div class="rv"><b><span class="cnt" data-n="265">265</span></b><span>tracteurs et remorques</span></div>
+  <div class="rv d1"><b><span class="cnt" data-n="30">30</span></b><span>chariots élévateurs, de 2,5 à 45 tonnes</span></div>
+  <div class="rv d2"><b><span class="cnt" data-n="7000">7 000</span></b><span>places palettes au hub aéroportuaire</span></div>
+ </div>
+ <p class="note">Chiffres repris du site actuel de Proline Logistics, à reconfirmer avant mise en ligne.</p>
+</div></section>
+
+<section class="parcs" id="parcs"><div class="wrap">
+ <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Implantations</div><h2 class="h2">Quatre parcs, placés pour raccourcir vos corridors.</h2></div><p class="lead">Zone industrielle, port, aéroport et une réserve d'extension. Cliquez sur un parc.</p></div>
+ <div class="pg">
+  <div class="map rv">
+   <svg viewBox="0 0 600 520" aria-label="Schéma des quatre parcs à Abidjan">
+    <defs><pattern id="gr" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0v30" fill="none" stroke="rgba(255,255,255,.05)"/></pattern></defs>
+    <rect width="600" height="520" fill="url(#gr)"/>
+    <path d="M0 300 C120 270 200 330 300 300 S470 250 600 285 L600 345 C470 320 380 365 300 360 S110 335 0 360Z" fill="#163447"/>
+    <path d="M0 430 C150 415 300 440 600 420 L600 520 0 520Z" fill="#12293a"/>
+    <text x="440" y="490" fill="#3f6680" font-family="Space Grotesk" font-size="13" letter-spacing="3">GOLFE DE GUINÉE</text>
+    <text x="40" y="335" fill="#3f6680" font-family="Space Grotesk" font-size="13" letter-spacing="3">LAGUNE ÉBRIÉ</text>
+    <path d="M150 170 C230 220 300 260 330 380 M330 380 C380 330 420 300 470 395 M150 170 C120 230 110 260 90 250" fill="none" stroke="rgba(238,91,34,.35)" stroke-width="2" stroke-dasharray="6 7"/>
+    <g class="pin on" data-p="0"><circle class="p" cx="150" cy="170" r="14"/><circle class="c" cx="150" cy="170" r="11"/><text x="172" y="165">Yopougon</text></g>
+    <g class="pin" data-p="1"><circle class="p" cx="330" cy="380" r="14"/><circle class="c" cx="330" cy="380" r="11"/><text x="350" y="375">Vridi · port</text></g>
+    <g class="pin" data-p="2"><circle class="p" cx="470" cy="395" r="14"/><circle class="c" cx="470" cy="395" r="11"/><text x="420" y="430">AeroHub</text></g>
+    <g class="pin" data-p="3"><circle class="p" cx="90" cy="250" r="14"/><circle class="c" cx="90" cy="250" r="11"/><text x="40" y="225">Ndotre</text></g>
+   </svg>
+   <span class="mapnote">Schéma indicatif, positions non à l'échelle</span>
+  </div>
+  <div class="pl">
+   <button class="pc on" data-p="0"><div class="top"><div><small>01 · SIÈGE</small><h3>Parc Yopougon</h3></div><span class="sz">72 000 m²</span></div><ul><li>33 000 m² d'entrepôt</li><li>30 000 m² de parc à conteneurs</li><li>9 000 m² de zone technique et maintenance</li><li>Bureaux de 400 m²</li></ul></button>
+   <button class="pc" data-p="1"><div class="top"><div><small>02 · PORT</small><h3>Parc Vridi</h3></div><span class="sz">20 000 m²</span></div><ul><li>10 000 m² d'entrepôt</li><li>10 000 m² de parc à conteneurs</li><li>Bureaux de 300 m²</li><li>Proximité portuaire</li></ul></button>
+   <button class="pc" data-p="2"><div class="top"><div><small>03 · AÉROPORT</small><h3>Zone AeroHub</h3></div><span class="sz">1,5 ha</span></div><ul><li>4 500 m² d'entrepôts logistiques</li><li>7 000 places palettes</li><li>Opéré avec CEVA Logistics</li></ul></button>
+   <button class="pc" data-p="3"><div class="top"><div><small>04 · EXTENSION</small><h3>Terrain Ndotre</h3></div><span class="sz">20 000 m²</span></div><ul><li>Parc à conteneurs</li><li>Projet logistique sur 2 ha</li><li>Lancé en 2024</li></ul></button>
+   <a class="btn b-or" href="#contact" style="justify-self:start;margin-top:10px">Planifier une visite <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+  </div>
+ </div>
+</div></section>
+
+<section><div class="wrap">
+ <div class="rv"><div class="eye">Sur le terrain</div><h2 class="h2">Nos opérations, sans mise en scène.</h2></div>
+ <div class="gal">
+  <figure class="rv"><img src="assets/entrepot-cartons.jpg" alt="Réception en entrepôt"><figcaption>Réception et contrôle<small>Entrepôt Proline</small></figcaption></figure>
+  <figure class="rv d1"><img src="assets/entrepot-rack.jpg" alt="Allée rackée"><figcaption>Stockage racké<small>43 000 m²</small></figcaption></figure>
+  <figure class="rv"><img src="assets/gestion-stock-cariste.jpg" alt="Cariste"><figcaption>Manutention<small>Caristes CACES</small></figcaption></figure>
+  <figure class="rv d1"><img src="assets/transport-hors-gabarit.jpg" alt="Colis hors-gabarit"><figcaption>Hors-gabarit<small>Charges exceptionnelles</small></figcaption></figure>
+  <figure class="rv d2"><img src="assets/transport-citerne.jpg" alt="Camion-citerne"><figcaption>Hydrocarbures<small>80 000 m³ par an</small></figcaption></figure>
+ </div>
+</div></section>
+
+<section class="hist" id="histoire" style="padding-top:40px"><div class="wrap">
+ <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Notre histoire</div><h2 class="h2">D'un entrepôt à quatre parcs.</h2></div><p class="lead">Faites défiler : chaque étape a ajouté une capacité pour les industriels et les armateurs.</p></div>
+ <div class="track rv d1">
+  <div class="yr"><b>2014</b><p>Premiers entrepôts sur 6 000 m² en zone industrielle de Yopougon.</p></div>
+  <div class="yr"><b>2015</b><p>Lancement du transport de conteneurs, entrepôts étendus à 15 000 m².</p></div>
+  <div class="yr"><b>2016</b><p>Terre-plein conteneurs de 18 000 m² et 9 000 m² d'entrepôts supplémentaires.</p></div>
+  <div class="yr"><b>2018</b><p>Transport d'hydrocarbures pour TotalEnergies, hub logistique de 12 000 m² à Yopougon.</p></div>
+  <div class="yr"><b>2021</b><p>Hub portuaire de 20 000 m², dont 10 000 m² d'entrepôt racké.</p></div>
+  <div class="yr"><b>2024</b><p>Hub aéroportuaire de 7 000 places palettes avec CEVA, projet Ndotre sur 2 ha.</p></div>
+ </div>
+</div></section>
+
+<section class="cl" id="clients"><div class="wrap">
+ <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Références</div><h2 class="h2" style="color:var(--ink)">Ils nous confient leurs flux.</h2></div><p class="lead" style="color:#5f7488">Armateurs internationaux, agro-industrie et grande consommation : une même exigence de fiabilité.</p></div>
+ <div class="lg rv d1"><div>Maersk</div><div>CMA CGM</div><div>Hapag-Lloyd</div><div>MEDLOG</div><div>CEVA Logistics</div><div>Nestlé</div><div>Cargill</div><div>TotalEnergies</div><div>SAPH</div><div>Sania</div><div>SACO · Barry Callebaut</div><div>FrieslandCampina</div></div>
+ <div class="q3">
+  <div class="rv"><b>ISO 9001</b><p>Qualité · démarche de certification engagée</p></div>
+  <div class="rv d1"><b>ISO 14001</b><p>Environnement · démarche de certification engagée</p></div>
+  <div class="rv d2"><b>ISO 45001</b><p>Santé et sécurité au travail · démarche engagée</p></div>
+ </div>
+ <div class="sect rv"><span>Agro-industrie</span><span>FMCG</span><span>Pharmaceutique</span><span>Électronique et industriel</span><span>Matières premières agricoles</span><span>Hydrocarbures</span></div>
+</div></section>
+
+<section class="cta" id="contact" style="padding:130px 0 0"><div class="wrap"><div class="box">
+ <div class="in">
+  <div class="rv"><div class="eye">Contact</div><h2 style="margin-top:20px">Externalisez votre logistique, en confiance.</h2><p style="color:rgba(255,255,255,.75);margin-top:18px;max-width:440px">Nos équipes vous recontactent sous 24 heures ouvrées pour étudier vos besoins.</p>
+   <div class="co">
+    <a href="tel:+2252723465743"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+225 27 23 46 57 43</a>
+    <a href="mailto:info@prolinelogistic.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>info@prolinelogistic.com</a>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.3A7 7 0 0 1 19 9.7C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/></svg>Zone industrielle Yopougon, 23 BP 3935 Abidjan 25</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Lun – Ven 8 h – 18 h · Sam 8 h – 13 h</div>
+   </div>
+  </div>
+  <form class="rv d2" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset()">
+   <label>NOM COMPLET<input required></label><label>ENTREPRISE<input></label>
+   <label>E-MAIL<input type="email" required></label><label>TÉLÉPHONE<input type="tel"></label>
+   <label class="f">BESOIN<select><option>Solution 3PL globale</option><option>Transport de conteneurs</option><option>Transport d'hydrocarbures</option><option>Transport hors-gabarit</option><option>Distribution palette ou colis</option><option>Entreposage</option><option>Gestion de stock / WMS</option><option>Parc à conteneurs</option><option>Visite d'un parc</option><option>Autre</option></select></label>
+   <label class="f">MESSAGE<textarea placeholder="Volumes, fréquence, type de marchandise…"></textarea></label>
+   <button class="btn b-or" type="submit" style="justify-self:start">Envoyer ma demande <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
+   <div class="ok">Votre demande a bien été enregistrée. Nos équipes vous recontactent sous 24 heures ouvrées.</div>
+   <small>En envoyant ce formulaire, vous acceptez d'être recontacté par nos équipes commerciales.</small>
+  </form>
+ </div>
+</div></div></section>
+
+<footer><div class="wrap">
+ <div class="fbig">PROLINE LOGISTICS</div>
+ <div class="fg">
+  <div><img src="assets/logo-clair.png" alt="Proline Logistics"><p>Prestataire logistique 3PL implanté à Abidjan depuis 2013 : transport, entreposage et gestion de stock.</p>
+   <div class="soc"><a href="https://www.linkedin.com/company/proline-logistics-ci" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a></div></div>
+  <div><h4>Métiers</h4><ul><li><a href="#metiers">Transport</a></li><li><a href="#metiers">Entreposage et stock</a></li><li><a href="#flux">Votre flux</a></li></ul></div>
+  <div><h4>Entreprise</h4><ul><li><a href="#histoire">Histoire</a></li><li><a href="#parcs">Implantations</a></li><li><a href="#clients">Références</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  <div><h4>Contact</h4><ul><li><a href="tel:+2252723465743">+225 27 23 46 57 43</a></li><li><a href="mailto:info@prolinelogistic.com">info@prolinelogistic.com</a></li><li>Zone industrielle Yopougon<br>23 BP 3935 Abidjan 25, Côte d'Ivoire</li></ul></div>
+ </div>
+ <div class="legal"><span>© 2026 Proline Logistics. Tous droits réservés. · <a href="#">Mentions légales</a></span><span>Photos du port : Farid Mernissi (CC BY-SA 4.0) et Romain Seaf (CC BY-SA 2.0), Wikimedia Commons</span></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const fmt=n=>n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,n=+el.dataset.n,t0=performance.now();co.unobserve(el);
+ const f=t=>{const p=Math.min(1,(t-t0)/1600);el.textContent=fmt(Math.round(n*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.4});
+document.querySelectorAll('.cnt').forEach(el=>co.observe(el));
+document.querySelectorAll('.tl button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tl button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.tp').forEach((p,i)=>p.classList.toggle('on',i==b.dataset.t))});
+const sel=i=>{document.querySelectorAll('.pc').forEach(x=>x.classList.toggle('on',x.dataset.p==i));document.querySelectorAll('.pin').forEach(x=>x.classList.toggle('on',x.dataset.p==i))};
+document.querySelectorAll('.pc,.pin').forEach(el=>el.addEventListener('click',()=>sel(el.dataset.p)));
+</script>
+</body></html>
