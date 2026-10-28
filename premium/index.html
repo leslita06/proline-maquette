@@ -36,7 +36,7 @@ h1,h2,h3,h4,.sg{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;lin
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero .bg{position:absolute;inset:-6% 0 0;background:url(assets/port-abidjan-navire.jpg) center 60%/cover;transform:scale(1.08);animation:zoom 18s var(--ease) forwards}
 @keyframes zoom{to{transform:scale(1)}}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,22,32,.55) 0%,rgba(11,22,32,.25) 35%,rgba(11,22,32,.92) 82%,var(--night) 100%)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,22,32,.78) 0%,rgba(11,22,32,.35) 45%,rgba(11,22,32,0) 70%),linear-gradient(180deg,rgba(11,22,32,.55) 0%,rgba(11,22,32,.25) 35%,rgba(11,22,32,.92) 82%,var(--night) 100%)}
 .hero .in{position:relative;z-index:2;width:100%;padding:150px 0 64px}
 .hero h1{font-size:clamp(52px,8.6vw,138px);font-weight:500;max-width:1100px;margin:22px 0 0}
 .hero h1 .l{display:block;overflow:hidden}
@@ -93,7 +93,7 @@ section{padding:130px 0;position:relative}
 .st .ic svg{width:26px;height:26px}
 .st:before{counter-increment:s;content:"0" counter(s);font-family:"Space Grotesk";font-size:13px;color:var(--mut);margin-bottom:18px}
 .st h4{font-size:22px;font-weight:500;margin:22px 0 10px}
-.st p{color:var(--mut);font-size:14px;margin-top:auto}
+.st p{color:var(--mut);font-size:14px}
 /* chiffres */
 .nums .g{display:grid;grid-template-columns:repeat(3,1fr);margin-top:70px}
 .nums .g div{padding:40px 30px 40px 0;border-top:1px solid var(--line)}
@@ -136,6 +136,7 @@ section{padding:130px 0;position:relative}
 .yr{flex:0 0 300px;scroll-snap-align:start;border-left:2px solid var(--or);padding:6px 26px 6px 22px}
 .yr b{font-family:"Space Grotesk";font-size:64px;font-weight:400;letter-spacing:-.04em;color:rgba(255,255,255,.9)}
 .yr p{color:var(--mut);margin-top:10px}
+@media(min-width:1101px){.hist .track{display:grid;grid-template-columns:repeat(6,1fr);overflow:visible}.yr{padding:6px 14px 6px 18px}.yr b{font-size:52px}.yr p{font-size:14px}}
 /* clients + qhse */
 .cl{background:var(--paper);color:var(--ink)}
 .lg{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid #d5dde4;border-top:1px solid #d5dde4;margin-top:60px}
@@ -311,7 +312,7 @@ footer a:hover{color:#fff}
 </div></section>
 
 <section class="hist" id="histoire" style="padding-top:40px"><div class="wrap">
- <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Notre histoire</div><h2 class="h2">D'un entrepôt à quatre parcs.</h2></div><p class="lead">Faites défiler : chaque étape a ajouté une capacité pour les industriels et les armateurs.</p></div>
+ <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Notre histoire</div><h2 class="h2">D'un entrepôt à quatre parcs.</h2></div><p class="lead">Chaque étape a ajouté une capacité pour les industriels et les armateurs.</p></div>
  <div class="track rv d1">
   <div class="yr"><b>2014</b><p>Premiers entrepôts sur 6 000 m² en zone industrielle de Yopougon.</p></div>
   <div class="yr"><b>2015</b><p>Lancement du transport de conteneurs, entrepôts étendus à 15 000 m².</p></div>
