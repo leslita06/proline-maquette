@@ -1,0 +1,23 @@
+name: depot-refonte
+on:
+  push:
+    paths: ['.github/workflows/depot-refonte.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  depot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p refonte
+          curl -fsSL -o refonte/index.html 'https://d2ol7oe51mr4n9.cloudfront.net/user_3CLiuDaqihMgfiUGQ0KFfywxTTr/46c3bd11-d5a1-466c-bfa3-d54d87c55839.html'
+          sed -i 's#https://leslita06.github.io/proline-maquette/premium/assets/#../premium/assets/#g' refonte/index.html
+          sha1sum refonte/index.html
+          git rm -q .github/workflows/depot-refonte.yml
+          git config user.name 'Mstudio'
+          git config user.email 'eir@mstudio.vc'
+          git add refonte/index.html
+          git commit -m 'Refonte moderne : page /refonte/ (maquette, non publiee par Proline Logistics)'
+          git push
