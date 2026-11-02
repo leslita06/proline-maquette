@@ -1,0 +1,31 @@
+name: deployer-archive
+on:
+  push:
+    paths: ['deploy/archive.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recuperer et deballer l'archive
+        run: |
+          set -e
+          URL=$(head -n1 deploy/archive.txt | tr -d '\r')
+          SHA=$(sed -n 2p deploy/archive.txt | tr -d '\r')
+          curl -fsSL "$URL" -o /tmp/site.zip
+          echo "$SHA  /tmp/site.zip" | sha256sum -c -
+          for d in $(sed -n '3p' deploy/archive.txt); do git rm -r -q --ignore-unmatch "$d" || true; done
+          unzip -o -q /tmp/site.zip -d .
+          git config user.name "leslita06"
+          git config user.email "leslita06@users.noreply.github.com"
+          git add -A
+          git commit -m "Maquette premium : deploiement de l'archive $SHA" || echo "rien a commiter"
+          git push
+      - name: Demander la reconstruction de la page
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
