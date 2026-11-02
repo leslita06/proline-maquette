@@ -2,382 +2,670 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Proline Logistics · Le quai, l'entrepôt, la route (maquette premium)</title>
+<meta name="theme-color" content="#0b1620">
+<title>Proline Logistics · Logisticien 3PL à Abidjan depuis 2013</title>
+<meta name="description" content="Transport, entreposage et gestion de stock à Abidjan : 43 000 m² d'entrepôts rackés, 70 000 m² de terre-plein, quatre parcs logistiques.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ee5b22'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="preload" as="image" href="assets/hero-169.jpg">
 <style>
-:root{--night:#0b1620;--ink:#11202e;--ink2:#172b3c;--steel:#3a5a72;--or:#ee5b22;--or2:#ff7a45;--paper:#f3f5f7;--line:rgba(255,255,255,.12);--mut:#93a7b8;--ease:cubic-bezier(.2,.7,.1,1)}
+:root{--night:#0b1620;--ink:#11202e;--ink2:#172b3c;--or:#ee5b22;--or2:#ff7a45;--paper:#f3f5f7;--line:rgba(255,255,255,.12);--mut:#9db0c0;--mut2:#5f7488;--ease:cubic-bezier(.2,.7,.1,1)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:80px}
 body{font-family:Inter,system-ui,sans-serif;background:var(--night);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.55}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
 .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
-h1,h2,h3,h4,.sg{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1}
-.eye{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--or);display:flex;align-items:center;gap:12px}
-.eye:before{content:"";width:28px;height:2px;background:var(--or)}
-.demo{position:relative;z-index:70;background:#0b1620;color:rgba(255,255,255,.7);font-size:11px;text-align:center;padding:0 12px;height:28px;line-height:28px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* nav */
-.nav{position:fixed;left:0;right:0;top:28px;z-index:60;transition:.4s var(--ease)}
-.nav.s{top:0;background:rgba(11,22,32,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
-.nav img{height:46px;width:auto}
-.nav ul{display:flex;gap:34px;list-style:none;font-size:14px;color:rgba(255,255,255,.78)}
-.nav ul a:hover{color:#fff}
-.btn{display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:15px;padding:16px 26px;border-radius:999px;transition:.35s var(--ease);cursor:pointer;border:0;font-family:inherit}
-.btn svg{width:18px;height:18px;transition:transform .35s var(--ease)}
+h1,h2,h3,h4,.sg{font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em;line-height:1.02}
+.eye{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--or);display:flex;align-items:center;gap:12px}
+.eye:before{content:"";width:28px;height:2px;background:var(--or);flex:none}
+.h2{font-size:clamp(36px,5vw,72px);font-weight:500;margin-top:18px}
+.h2 em,h1 em{font-style:normal;color:var(--or)}
+.lead{color:var(--mut);font-size:18px;max-width:520px}
+.light{background:var(--paper);color:var(--ink)}
+.light .lead{color:var(--mut2)}
+section{padding:120px 0;position:relative}
+.head{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap}
+.demo{position:relative;z-index:70;background:#060d13;color:rgba(255,255,255,.62);font-size:11px;text-align:center;padding:0 12px;height:26px;line-height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* boutons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;transition:.35s var(--ease);cursor:pointer;border:0;font-family:inherit;white-space:nowrap}
+.btn svg{width:18px;height:18px;transition:transform .35s var(--ease);flex:none}
 .btn:hover svg{transform:translateX(4px)}
 .b-or{background:var(--or);color:#fff}.b-or:hover{background:var(--or2)}
-.b-gl{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px)}.b-gl:hover{background:#fff;color:var(--ink)}
-.b-sm{padding:12px 20px;font-size:14px}
-/* hero */
-.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
-.hero .bg{position:absolute;inset:-6% 0 0;background:url(assets/port-abidjan-navire.jpg) center 60%/cover;transform:scale(1.08);animation:zoom 18s var(--ease) forwards}
-@keyframes zoom{to{transform:scale(1)}}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,22,32,.78) 0%,rgba(11,22,32,.35) 45%,rgba(11,22,32,0) 70%),linear-gradient(180deg,rgba(11,22,32,.55) 0%,rgba(11,22,32,.25) 35%,rgba(11,22,32,.92) 82%,var(--night) 100%)}
-.hero .in{position:relative;z-index:2;width:100%;padding:150px 0 64px}
-.hero h1{font-size:clamp(52px,8.6vw,138px);font-weight:500;max-width:1100px;margin:22px 0 0}
-.hero h1 .l{display:block;overflow:hidden}
-.hero h1 .l span{display:inline-block;transform:translateY(105%);animation:up 1.1s var(--ease) forwards}
-.hero h1 .l:nth-child(2) span{animation-delay:.12s}.hero h1 .l:nth-child(3) span{animation-delay:.24s}
-.hero h1 em{font-style:normal;color:var(--or)}
+.b-gl{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px)}.b-gl:hover{background:#fff;color:var(--ink)}
+.b-ink{background:var(--ink);color:#fff}.b-ink:hover{background:#000}
+.b-ln{background:transparent;border:1px solid #cdd6de;color:var(--ink)}.b-ln:hover{border-color:var(--ink)}
+.b-sm{padding:11px 18px;font-size:14px}
+/* navigation */
+.nav{position:fixed;left:0;right:0;top:26px;z-index:60;transition:background .4s var(--ease),top .4s var(--ease)}
+.nav.s{top:0;background:rgba(11,22,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:80px}
+.nav .logo img{height:44px;width:auto}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:14px;color:rgba(255,255,255,.8);margin-left:auto}
+.nav ul a:hover{color:#fff}
+.lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;font-size:12px;font-weight:600}
+.lang button{all:unset;cursor:pointer;padding:7px 11px;color:rgba(255,255,255,.7)}
+.lang button.on{background:#fff;color:var(--ink)}
+.burger{all:unset;display:none;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.28);place-items:center}
+.burger svg{width:20px;height:20px}
+.drawer{position:fixed;inset:0;z-index:80;background:var(--night);padding:90px 28px 40px;display:flex;flex-direction:column;gap:6px;transform:translateY(-100%);transition:transform .5s var(--ease);visibility:hidden}
+.drawer.on{transform:none;visibility:visible}
+.drawer a.l{font-family:"Space Grotesk";font-size:30px;font-weight:500;padding:12px 0;border-bottom:1px solid var(--line)}
+.drawer .x{position:absolute;top:22px;right:22px}
+/* accueil vidéo */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:0;background:#0b1620 url(assets/hero-169.jpg) center/cover}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,22,32,.88) 0%,rgba(11,22,32,.55) 48%,rgba(11,22,32,.1) 75%),linear-gradient(180deg,rgba(11,22,32,.55) 0%,rgba(11,22,32,0) 30%,rgba(11,22,32,.55) 70%,var(--night) 100%)}
+.hero .in{position:relative;z-index:2;width:100%;padding:150px 0 0}
+.hero h1{font-size:clamp(44px,5.4vw,84px);font-weight:500;max-width:1100px;margin:22px 0 0}
+.hero h1 .l{display:block;overflow:hidden;padding-bottom:.04em}
+.hero h1 .l>span{display:inline-block;transform:translateY(105%);animation:up 1.1s var(--ease) forwards}
+.hero h1 .l:nth-child(2)>span{animation-delay:.12s}.hero h1 .l:nth-child(3)>span{animation-delay:.24s}
 @keyframes up{to{transform:none}}
-.hero .row{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-top:40px;flex-wrap:wrap}
-.hero p{max-width:470px;font-size:18px;color:rgba(255,255,255,.8);opacity:0;animation:fade 1s .6s forwards}
-.hero .ctas{display:flex;gap:12px;opacity:0;animation:fade 1s .75s forwards;flex-wrap:wrap}
+.hero p.sub{max-width:520px;font-size:18px;color:rgba(255,255,255,.85);margin-top:26px;opacity:0;animation:fade 1s .6s forwards}
+.hero .ctas{display:flex;gap:12px;margin-top:30px;opacity:0;animation:fade 1s .75s forwards;flex-wrap:wrap}
 @keyframes fade{to{opacity:1}}
-.hero .stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:54px;border-top:1px solid var(--line)}
-.hero .stats div{padding:24px 24px 0 0}
-.hero .stats b{font-family:"Space Grotesk";font-size:clamp(28px,3vw,42px);font-weight:500}
-.hero .stats small{display:block;color:var(--mut);font-size:13px;margin-top:4px}
-.credit{position:absolute;right:32px;top:130px;z-index:2;font-size:10px;color:rgba(255,255,255,.45);writing-mode:vertical-rl}
-/* marquee */
-.mq{border-block:1px solid var(--line);overflow:hidden;padding:26px 0;background:var(--night)}
-.mq .t{display:flex;gap:64px;width:max-content;animation:mq 38s linear infinite}
-.mq span{font-family:"Space Grotesk";font-size:26px;font-weight:500;color:rgba(255,255,255,.42);white-space:nowrap;display:flex;align-items:center;gap:64px}
-.mq span:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--or)}
-@keyframes mq{to{transform:translateX(-50%)}}
-section{padding:130px 0;position:relative}
-.h2{font-size:clamp(40px,5.4vw,82px);font-weight:500;margin-top:20px}
-.h2 em{font-style:normal;color:var(--or)}
-.lead{color:var(--mut);font-size:18px;max-width:460px}
-/* manifeste */
-.mani .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
-.mani .big{font-family:"Space Grotesk";font-size:clamp(28px,2.8vw,40px);line-height:1.18;font-weight:400;letter-spacing:-.02em}
-.mani .big b{color:var(--or);font-weight:500}
-/* services tabs */
-.svc{background:var(--paper);color:var(--ink)}
-.svc .lead{color:#5f7488}
-.tabs{display:grid;grid-template-columns:380px 1fr;gap:56px;margin-top:64px}
-.tl button{all:unset;cursor:pointer;display:block;width:100%;padding:24px 0;border-top:1px solid #d5dde4;transition:.3s}
-.tl button:last-child{border-bottom:1px solid #d5dde4}
-.tl button small{display:block;font-size:12px;font-weight:700;color:#8ea0b0;letter-spacing:.14em}
-.tl button span{font-family:"Space Grotesk";font-size:28px;font-weight:500;letter-spacing:-.02em;color:#8ea0b0;transition:.3s}
-.tl button.on span,.tl button:hover span{color:var(--ink)}
-.tl button.on small{color:var(--or)}
-.tp{display:none;grid-template-columns:1.1fr 1fr;gap:36px;animation:fade .6s}
-.tp.on{display:grid}
-.tp img{border-radius:22px;aspect-ratio:4/5;object-fit:cover;width:100%}
-.tp h3{font-size:36px;font-weight:500;margin-bottom:16px}
-.tp p{color:#5f7488}
-.tp ul{list-style:none;margin-top:26px;display:grid;gap:0}
-.tp li{padding:14px 0;border-top:1px solid #d5dde4;display:flex;justify-content:space-between;gap:14px;font-size:15px}
-.tp li b{font-family:"Space Grotesk";font-weight:600;color:var(--or);white-space:nowrap}
-/* flux */
-.flux .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:70px;counter-reset:s}
-.st{border:1px solid var(--line);border-radius:20px;padding:28px 22px;min-height:260px;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);transition:.4s var(--ease)}
-.st:hover{border-color:var(--or);transform:translateY(-6px)}
-.st .ic{width:52px;height:52px;border-radius:14px;background:rgba(238,91,34,.14);color:var(--or);display:grid;place-items:center}
-.st .ic svg{width:26px;height:26px}
-.st:before{counter-increment:s;content:"0" counter(s);font-family:"Space Grotesk";font-size:13px;color:var(--mut);margin-bottom:18px}
-.st h4{font-size:22px;font-weight:500;margin:22px 0 10px}
-.st p{color:var(--mut);font-size:14px}
+.vctl{all:unset;position:absolute;z-index:3;right:32px;top:130px;cursor:pointer;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;background:rgba(11,22,32,.35);backdrop-filter:blur(6px)}
+.vctl svg{width:16px;height:16px}
+.vnote{position:absolute;z-index:3;right:32px;bottom:14px;font-size:10px;color:rgba(255,255,255,.45)}
+/* barre d'actions rapides (façon grands logisticiens) */
+.qbar{margin-top:56px;background:rgba(255,255,255,.97);color:var(--ink);border-radius:22px 22px 0 0;box-shadow:0 -10px 60px rgba(0,0,0,.25);opacity:0;animation:fade 1s .9s forwards}
+.qtabs{display:flex;gap:4px;padding:10px 10px 0;border-bottom:1px solid #e3e8ed;overflow-x:auto}
+.qtabs button{all:unset;cursor:pointer;padding:12px 18px;font-size:14px;font-weight:600;color:#6c8194;border-bottom:3px solid transparent;white-space:nowrap;display:flex;gap:8px;align-items:center}
+.qtabs button svg{width:18px;height:18px}
+.qtabs button.on{color:var(--ink);border-color:var(--or)}
+.qp{display:none;padding:22px 24px 26px;gap:12px;align-items:end;grid-template-columns:1fr auto}
+.qp.on{display:grid}
+.qp.three{grid-template-columns:1fr 1fr 1fr auto}
+.fld{display:grid;gap:6px;font-size:12px;font-weight:600;color:#5f7488;letter-spacing:.02em}
+.fld input,.fld select,.fld textarea{font:inherit;font-size:15px;font-weight:400;color:var(--ink);background:#fff;border:1px solid #cfd8e0;border-radius:12px;padding:13px 14px;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--or);outline-offset:0;border-color:transparent}
 /* chiffres */
-.nums .g{display:grid;grid-template-columns:repeat(3,1fr);margin-top:70px}
-.nums .g div{padding:40px 30px 40px 0;border-top:1px solid var(--line)}
-.nums b{font-family:"Space Grotesk";font-size:clamp(54px,6.4vw,104px);font-weight:400;letter-spacing:-.05em;display:flex;align-items:baseline;gap:8px}
-.nums b i{font-style:normal;font-size:.32em;color:var(--or);letter-spacing:0}
-.nums span{color:var(--mut);display:block;margin-top:8px}
-.note{font-size:12px;color:#6f8597;margin-top:26px}
-/* parcs carte */
-.parcs{background:var(--ink)}
-.pg{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;margin-top:64px;align-items:stretch}
-.map{position:relative;border-radius:26px;overflow:hidden;background:#0e1c28;border:1px solid var(--line);min-height:520px}
-.map svg{position:absolute;inset:0;width:100%;height:100%}
-.pin{cursor:pointer}
-.pin circle.c{fill:var(--ink);stroke:var(--or);stroke-width:3;transition:.3s}
-.pin.on circle.c,.pin:hover circle.c{fill:var(--or)}
-.pin circle.p{fill:var(--or);opacity:.35;transform-box:fill-box;transform-origin:center;animation:pulse 2.4s infinite}
-@keyframes pulse{0%{transform:scale(.6);opacity:.5}100%{transform:scale(2.4);opacity:0}}
-.pin text{fill:#fff;font-family:"Space Grotesk";font-size:15px;font-weight:600}
-.mapnote{position:absolute;left:18px;bottom:14px;font-size:11px;color:#6f8597}
-.pl{display:grid;gap:12px}
-.pc{all:unset;cursor:pointer;display:block;border:1px solid var(--line);border-radius:20px;padding:24px 26px;transition:.35s var(--ease)}
+.nums{background:var(--night);padding:110px 0 100px}
+.ng{display:grid;grid-template-columns:repeat(3,1fr);margin-top:60px;border-left:1px solid var(--line)}
+.ng div{padding:36px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ng div:nth-child(-n+3){border-top:1px solid var(--line)}
+.ng b{font-family:"Space Grotesk";font-size:clamp(48px,5.6vw,88px);font-weight:400;letter-spacing:-.05em;display:flex;align-items:baseline;gap:8px;line-height:1}
+.ng b i{font-style:normal;font-size:.34em;color:var(--or);letter-spacing:0}
+.ng div>span{color:var(--mut);display:block;margin-top:12px;font-size:15px}
+/* services */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}
+.card{position:relative;border-radius:24px;overflow:hidden;min-height:440px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;isolation:isolate;cursor:default}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
+.card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,22,32,.05) 20%,rgba(11,22,32,.92) 78%)}
+.card:hover img{transform:scale(1.07)}
+.card .c{padding:28px}
+.card small{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--or2)}
+.card h3{font-size:30px;font-weight:500;margin:8px 0 10px}
+.card p{color:rgba(255,255,255,.82);font-size:15px}
+.card .kpi{display:inline-flex;gap:8px;align-items:baseline;margin-top:16px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);font-size:13px}
+.card .kpi b{font-family:"Space Grotesk";font-size:18px}
+.card ul{list-style:none;display:grid;gap:6px;margin-top:16px;font-size:14px;color:rgba(255,255,255,.85);max-height:0;overflow:hidden;transition:max-height .6s var(--ease)}
+.card:hover ul,.card:focus-within ul{max-height:200px}
+.card ul li:before{content:"›";color:var(--or2);margin-right:8px}
+.card.wide{grid-column:span 2}
+.tech{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.tech div{border:1px solid #d5dde4;border-radius:18px;padding:22px;background:#fff}
+.tech b{font-family:"Space Grotesk";font-size:20px;font-weight:600;display:block}
+.tech span{color:var(--mut2);font-size:14px}
+/* entreposage */
+.ent{background:var(--ink)}
+.eg{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;margin-top:10px}
+.eg .ph{border-radius:26px;overflow:hidden;aspect-ratio:4/3.4}
+.eg .ph img{width:100%;height:100%;object-fit:cover}
+.pb{font-family:"Space Grotesk";font-size:clamp(24px,2.4vw,34px);line-height:1.25;letter-spacing:-.02em;margin-top:24px}
+.pb b{color:var(--or);font-weight:500}
+.steps{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:80px}
+.steps:before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;background:var(--line)}
+.steps:after{content:"";position:absolute;left:0;top:27px;height:2px;width:var(--p,0%);background:var(--or);transition:width .2s linear}
+.step{position:relative;padding-top:0}
+.step .n{width:56px;height:56px;border-radius:50%;background:var(--ink);border:2px solid var(--or);display:grid;place-items:center;font-family:"Space Grotesk";font-weight:600;font-size:18px;position:relative;z-index:1}
+.step h4{font-size:21px;font-weight:500;margin:24px 0 8px}
+.step p{color:var(--mut);font-size:14px}
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:80px}
+.why div{border:1px solid var(--line);border-radius:20px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent)}
+.why b{font-family:"Space Grotesk";font-size:20px;font-weight:500;display:block;margin-bottom:8px}
+.why span{color:var(--mut);font-size:14px}
+.visit{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;margin-top:90px;align-items:start}
+.visit ul{list-style:none;display:grid;gap:0;margin-top:26px}
+.visit li{padding:16px 0;border-top:1px solid var(--line);display:flex;gap:14px}
+.visit li:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--or);margin-top:9px;flex:none}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 0;font-family:"Space Grotesk";font-size:19px;font-weight:500;display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--or);font-size:26px;line-height:.8;transition:transform .3s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq p{color:var(--mut);padding:0 0 20px;max-width:60ch}
+/* parcs */
+.pg{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;margin-top:60px;align-items:stretch}
+#map{border-radius:26px;overflow:hidden;min-height:560px;background:#0e1c28;border:1px solid var(--line);z-index:1}
+.leaflet-container{font-family:Inter,sans-serif;background:#0e1c28}
+.osm-dark{filter:invert(1) hue-rotate(185deg) brightness(.82) contrast(.9) saturate(.55)}
+.pinm{width:22px;height:22px;border-radius:50%;background:var(--or);border:4px solid #fff;box-shadow:0 0 0 6px rgba(238,91,34,.35)}
+.leaflet-tooltip.lbl{background:#0b1620;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;font-family:"Space Grotesk";font-weight:600;font-size:13px;padding:6px 10px;box-shadow:none}
+.leaflet-tooltip.lbl:before{display:none}
+.pl{display:grid;gap:12px;align-content:start}
+.pc{all:unset;cursor:pointer;display:block;border:1px solid var(--line);border-radius:20px;padding:22px 24px;transition:.35s var(--ease)}
 .pc .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .pc small{font-size:12px;letter-spacing:.14em;color:var(--or);font-weight:700}
-.pc h3{font-size:26px;font-weight:500;margin-top:6px}
-.pc .sz{font-family:"Space Grotesk";font-size:24px;color:#fff}
-.pc ul{list-style:none;display:none;margin-top:16px;color:var(--mut);font-size:14px;gap:6px}
+.pc h3{font-size:24px;font-weight:500;margin-top:4px}
+.pc .sz{font-family:"Space Grotesk";font-size:22px}
+.pc ul{list-style:none;display:none;margin-top:14px;color:var(--mut);font-size:14px;gap:5px}
 .pc.on{background:rgba(238,91,34,.1);border-color:var(--or)}
 .pc.on ul{display:grid}
-/* galerie */
-.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:64px}
-.gal figure{position:relative;border-radius:22px;overflow:hidden;height:380px}
-.gal figure:nth-child(1){grid-column:span 7}.gal figure:nth-child(2){grid-column:span 5}
-.gal figure:nth-child(3){grid-column:span 4}.gal figure:nth-child(4){grid-column:span 4}.gal figure:nth-child(5){grid-column:span 4}
-.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.gal figure:hover img{transform:scale(1.06)}
-.gal figcaption{position:absolute;inset:auto 0 0 0;padding:60px 22px 20px;background:linear-gradient(transparent,rgba(11,22,32,.9));font-family:"Space Grotesk";font-size:20px;font-weight:500}
-.gal figcaption small{display:block;font-family:Inter;font-size:12px;color:var(--mut);font-weight:400}
-/* parcours horizontal */
-.hist .track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:64px;padding-bottom:18px;scrollbar-width:thin;scrollbar-color:var(--or) transparent}
-.yr{flex:0 0 300px;scroll-snap-align:start;border-left:2px solid var(--or);padding:6px 26px 6px 22px}
-.yr b{font-family:"Space Grotesk";font-size:64px;font-weight:400;letter-spacing:-.04em;color:rgba(255,255,255,.9)}
-.yr p{color:var(--mut);margin-top:10px}
-@media(min-width:1101px){.hist .track{display:grid;grid-template-columns:repeat(6,1fr);overflow:visible}.yr{padding:6px 14px 6px 18px}.yr b{font-size:52px}.yr p{font-size:14px}}
-/* clients + qhse */
-.cl{background:var(--paper);color:var(--ink)}
-.lg{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid #d5dde4;border-top:1px solid #d5dde4;margin-top:60px}
-.lg div{border-right:1px solid #d5dde4;border-bottom:1px solid #d5dde4;height:120px;display:grid;place-items:center;font-family:"Space Grotesk";font-size:22px;font-weight:600;color:#7a8da0;transition:.3s;text-align:center;padding:10px}
-.lg div:hover{background:#fff;color:var(--ink)}
-.q3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.q3 div{background:#fff;border-radius:18px;padding:26px;border:1px solid #e1e7ec}
-.q3 b{font-family:"Space Grotesk";font-size:24px;font-weight:600}
-.q3 p{color:#5f7488;font-size:14px;margin-top:6px}
-.sect{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
-.sect span{border:1px solid #cfd8e0;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500}
-/* cta + form */
-.cta{padding:0}
-.cta .box{position:relative;border-radius:32px;overflow:hidden;padding:90px 70px;background:url(assets/port-abidjan-camions.jpg) center/cover}
-.cta .box:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,22,32,.96) 35%,rgba(238,91,34,.55))}
-.cta .in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.cta h2{font-size:clamp(40px,4.6vw,70px);font-weight:500}
-.cta .co{margin-top:34px;display:grid;gap:14px;color:rgba(255,255,255,.85)}
-.cta .co a,.cta .co div{display:flex;gap:12px;align-items:center}
-.cta .co svg{width:20px;height:20px;color:var(--or);flex:none}
-form{background:rgba(11,22,32,.72);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-form .f{grid-column:1/-1}
-label{font-size:12px;font-weight:600;color:var(--mut);display:grid;gap:7px;letter-spacing:.04em}
-input,select,textarea{font:inherit;font-size:15px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:14px}
-select option{color:var(--ink)}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--or)}
-textarea{min-height:110px;resize:vertical}
-.ok{display:none;grid-column:1/-1;background:rgba(46,160,90,.18);border:1px solid rgba(46,160,90,.5);color:#bff0cf;border-radius:12px;padding:14px;font-size:14px}
-form small{grid-column:1/-1;font-size:12px;color:#7d92a4}
-/* footer */
-footer{padding:110px 0 30px;overflow:hidden}
-.fbig{overflow:hidden;font-family:"Space Grotesk";font-size:clamp(40px,8.6vw,124px);font-weight:500;letter-spacing:-.06em;line-height:.85;color:rgba(255,255,255,.07);margin-bottom:60px;white-space:nowrap}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;font-size:14px;color:var(--mut)}
-footer img{height:50px;width:auto;margin-bottom:18px}
+.pc:focus-visible{outline:2px solid var(--or)}
+.mapnote{font-size:12px;color:#7d92a4;margin-top:12px}
+/* suivi */
+.trk{display:grid;grid-template-columns:1fr 1.15fr;gap:60px;align-items:start;margin-top:10px}
+.tbox{background:#fff;border:1px solid #dfe5ea;border-radius:24px;padding:30px;box-shadow:0 30px 60px -40px rgba(17,32,46,.4)}
+.tform{display:grid;grid-template-columns:1fr auto;gap:10px}
+.tres{display:none;margin-top:26px}
+.tres.on{display:block}
+.thd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid #e3e8ed}
+.thd b{font-family:"Space Grotesk";font-size:20px}
+.badge{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(238,91,34,.12);color:#c2410c}
+.tl{list-style:none;margin-top:20px;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:22px 1fr auto;gap:14px;padding:12px 0;position:relative}
+.tl li:before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid #cfd8e0;background:#fff;margin-top:4px;position:relative;z-index:1}
+.tl li:not(:last-child):after{content:"";position:absolute;left:7px;top:26px;bottom:-12px;width:2px;background:#e3e8ed}
+.tl li.d:before{background:var(--or);border-color:var(--or)}
+.tl li.d:not(:last-child):after{background:var(--or)}
+.tl li.c:before{border-color:var(--or);box-shadow:0 0 0 5px rgba(238,91,34,.18)}
+.tl b{font-weight:600;font-size:15px}
+.tl span{display:block;color:var(--mut2);font-size:13px}
+.tl time{font-size:13px;color:var(--mut2);white-space:nowrap}
+.demo-tag{display:inline-block;margin-top:16px;font-size:12px;color:#7a8da0}
+/* devis */
+.dv{background:var(--ink)}
+.dg{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+.co{margin-top:34px;display:grid;gap:16px;color:rgba(255,255,255,.88)}
+.co>a,.co>div{display:flex;gap:14px;align-items:flex-start}
+.co svg{width:20px;height:20px;color:var(--or);flex:none;margin-top:2px}
+.co small{display:block;color:var(--mut);font-size:12px}
+.wiz{background:#fff;color:var(--ink);border-radius:26px;padding:34px;position:relative}
+.prog{display:flex;gap:8px;margin-bottom:28px}
+.prog i{flex:1;height:4px;border-radius:4px;background:#e3e8ed;transition:.4s}
+.prog i.on{background:var(--or)}
+.wst{display:none}
+.wst.on{display:block;animation:fade .5s}
+.wst h3{font-size:26px;font-weight:500}
+.wst .s{color:var(--mut2);font-size:14px;margin:6px 0 22px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:flex;align-items:center;gap:10px;border:1px solid #cfd8e0;border-radius:14px;padding:14px;font-size:14px;font-weight:500;transition:.25s}
+.chips span:before{content:"";width:16px;height:16px;border-radius:5px;border:2px solid #b7c3ce;flex:none;transition:.25s}
+.chips input:checked+span{border-color:var(--or);background:rgba(238,91,34,.07)}
+.chips input:checked+span:before{background:var(--or);border-color:var(--or)}
+.chips input:focus-visible+span{outline:2px solid var(--or)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.wnav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+.recap{background:var(--paper);border-radius:16px;padding:18px;font-size:14px;display:grid;gap:8px}
+.recap div{display:flex;justify-content:space-between;gap:18px}
+.recap span{color:var(--mut2)}
+.recap b{text-align:right;font-weight:600}
+.ok{display:none;border-radius:14px;padding:16px;font-size:14px;background:rgba(46,160,90,.1);border:1px solid rgba(46,160,90,.45);color:#1d6b3c;margin-top:16px}
+.err{color:#c0392b;font-size:13px;margin-top:10px;min-height:18px}
+/* qhse */
+.qg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px}
+.iso{background:#fff;border:1px solid #dfe5ea;border-radius:22px;padding:30px;position:relative;overflow:hidden}
+.iso .tag{font-family:"Space Grotesk";font-size:44px;font-weight:600;letter-spacing:-.04em}
+.iso .tag i{font-style:normal;color:var(--or)}
+.iso h4{font-size:19px;font-weight:600;margin-top:4px}
+.iso p{color:var(--mut2);font-size:14px;margin-top:10px}
+.iso .st{display:inline-block;margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.06em;color:#c2410c;background:rgba(238,91,34,.1);border-radius:999px;padding:6px 12px}
+.q2{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.q2 div{border-top:2px solid var(--ink);padding-top:18px}
+.q2 b{font-family:"Space Grotesk";font-size:20px;font-weight:600}
+.q2 p{color:var(--mut2);font-size:14px;margin-top:6px}
+.sect{display:flex;flex-wrap:wrap;gap:10px;margin-top:50px}
+.sect span{border:1px solid #cfd8e0;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:500;background:#fff}
+/* histoire */
+.track{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:60px;border-top:1px solid var(--line)}
+.yr{padding:26px 22px 10px 0;position:relative}
+.yr:before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;background:var(--or)}
+.yr b{font-family:"Space Grotesk";font-size:46px;font-weight:400;letter-spacing:-.04em}
+.yr p{color:var(--mut);font-size:14px;margin-top:8px}
+/* carrières */
+.car{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:60px}
+.car .ph{border-radius:24px;overflow:hidden;min-height:420px;position:relative}
+.car .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.jobs{display:grid;gap:12px}
+.job{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid #d5dde4;border-radius:18px;padding:22px 24px;background:#fff;transition:.3s}
+.job:hover{border-color:var(--or);transform:translateX(4px)}
+.job b{font-family:"Space Grotesk";font-size:21px;font-weight:600;display:block}
+.job span{color:var(--mut2);font-size:14px}
+.job svg{width:22px;height:22px;color:var(--or);flex:none}
+/* fin */
+.final{padding:0 0 0}
+.fbox{position:relative;border-radius:32px;overflow:hidden;padding:90px 70px;background:url(assets/port-navire.jpg) center/cover}
+.fbox:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,22,32,.95) 40%,rgba(238,91,34,.6))}
+.fbox .in{position:relative;display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap}
+.fbox h2{font-size:clamp(36px,4.6vw,66px);font-weight:500;max-width:16ch}
+footer{padding:100px 0 30px;overflow:hidden}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:40px;font-size:14px;color:var(--mut)}
+footer .logo img{height:48px;width:auto;margin-bottom:18px}
 footer h4{color:#fff;font-size:15px;font-weight:500;margin-bottom:16px}
 footer li{list-style:none;margin-bottom:10px}
 footer a:hover{color:#fff}
-.soc{display:flex;gap:10px;margin-top:20px}
-.soc a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:#fff;transition:.3s}
-.soc a:hover{background:var(--or);border-color:var(--or)}
-.soc svg{width:18px;height:18px}
 .legal{border-top:1px solid var(--line);margin-top:60px;padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:#6f8597}
-.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+/* WhatsApp flottant */
+.wa{all:unset;position:fixed;right:22px;bottom:22px;z-index:65;cursor:pointer;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .3s var(--ease)}
+.wa:hover{transform:scale(1.07)}
+.wa svg{width:30px;height:30px;color:#fff}
+.toast{position:fixed;left:50%;bottom:96px;z-index:90;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#0b1620;color:#fff;border:1px solid rgba(255,255,255,.2);padding:14px 18px;border-radius:14px;font-size:14px;max-width:min(92vw,460px);text-align:center;transition:.35s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* apparition */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.on{opacity:1;transform:none}
-.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
-@media(max-width:1020px){
- .nav ul{display:none}.mani .wrap,.tabs,.tp,.pg,.cta .in{grid-template-columns:1fr}
- .flux .steps{grid-template-columns:1fr 1fr}.nums .g{grid-template-columns:1fr 1fr}.hero .stats{grid-template-columns:1fr 1fr}
- .gal figure{grid-column:span 12!important;height:280px}.lg{grid-template-columns:repeat(2,1fr)}.q3{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}
- .cta .box{padding:50px 26px}.map{min-height:380px}.credit{display:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none}}
+/* tablette */
+@media(max-width:1080px){
+ .nav ul{display:none}.burger{display:grid}.nav .cta{display:none}.lang{margin-left:auto}
+ .cards{grid-template-columns:1fr 1fr}.card.wide{grid-column:span 2}.tech{grid-template-columns:1fr 1fr}
+ .eg,.visit,.pg,.trk,.dg,.car{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr 1fr}.steps:before,.steps:after{display:none}
+ .why{grid-template-columns:1fr 1fr}.qg,.q2{grid-template-columns:1fr}.track{grid-template-columns:repeat(3,1fr)}
+ .fg{grid-template-columns:1fr 1fr}.fbox{padding:60px 30px}.qp.three{grid-template-columns:1fr 1fr}
 }
-@media(max-width:560px){.hero:after{background:linear-gradient(180deg,rgba(11,22,32,.75),rgba(11,22,32,.6) 40%,rgba(11,22,32,.95) 80%,var(--night))}.eye{font-size:10px;letter-spacing:.18em}.nav .wrap{height:70px}.nav img{height:38px}.wrap{padding:0 20px}.flux .steps,.nums .g,form,.fg{grid-template-columns:1fr}section{padding:90px 0}.nav .b-or{display:none}}
+/* téléphone */
+@media(max-width:640px){
+ .wrap{padding:0 20px}section{padding:84px 0}.nav .wrap{height:66px;gap:12px}.nav .logo img{height:36px}
+ .hero{background-image:url(assets/hero-916.jpg)}
+ .hero:after{background:linear-gradient(180deg,rgba(11,22,32,.6),rgba(11,22,32,.35) 35%,rgba(11,22,32,.85) 70%,var(--night))}
+ .hero h1{font-size:clamp(30px,8.6vw,46px)}
+ .hero .in{padding-top:158px}.hero p.sub{font-size:16px}.hero .ctas .btn{flex:1;justify-content:center}
+ .vctl{right:20px;top:102px}.vnote{display:none}.hero .eye{font-size:11px;letter-spacing:.14em;padding-right:10px}.leaflet-tooltip.lbl{font-size:11px;padding:4px 7px}
+ .qbar{margin:40px -20px 0;border-radius:20px 20px 0 0}.qp,.qp.three{grid-template-columns:1fr;padding:18px 20px 22px}.qp .btn{justify-content:center}
+ .ng{grid-template-columns:1fr 1fr}.ng div{padding:26px 16px 26px 16px}.ng div:nth-child(3){border-top:0}.ng div:nth-child(-n+2){border-top:1px solid var(--line)}
+ .cards{grid-template-columns:1fr}.card.wide{grid-column:auto}.card{min-height:380px}.card ul{max-height:none}.tech{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr;gap:26px}.step{display:grid;grid-template-columns:56px 1fr;gap:0 18px}.step h4{margin:4px 0 6px}.step .n{grid-row:span 2}
+ .why{grid-template-columns:1fr}#map{min-height:380px}.tform{grid-template-columns:1fr}.tform .btn{justify-content:center}
+ .wiz{padding:24px 20px}.chips,.r2{grid-template-columns:1fr}.track{grid-template-columns:1fr 1fr}.yr b{font-size:38px}
+ .car .ph{min-height:280px}.fg{grid-template-columns:1fr}.fbox{padding:46px 24px;border-radius:24px}
+ .tl li{grid-template-columns:22px 1fr}.tl time{grid-column:2}
+}
 </style>
 </head>
 <body>
-<div class="demo">Maquette proposée par Yelema, non publiée · version premium</div>
+<div class="demo" data-en="Mock-up proposed by Yelema, not published">Maquette proposée par Yelema, non publiée</div>
+
 <header class="nav" id="nav"><div class="wrap">
- <a href="#"><img src="assets/logo-clair.png" alt="Proline Logistics"></a>
- <ul><li><a href="#metiers">Métiers</a></li><li><a href="#flux">Votre flux</a></li><li><a href="#parcs">Parcs</a></li><li><a href="#histoire">Histoire</a></li><li><a href="#clients">Références</a></li></ul>
- <a class="btn b-or b-sm" href="#contact">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+ <a class="logo" href="#top"><img src="assets/logo-clair.png" alt="Proline Logistics" width="123" height="44"></a>
+ <ul>
+  <li><a href="#services" data-en="Services">Services</a></li>
+  <li><a href="#entreposage" data-en="Warehousing">Entreposage</a></li>
+  <li><a href="#parcs" data-en="Our parks">Nos parcs</a></li>
+  <li><a href="#suivi" data-en="Tracking">Suivi</a></li>
+  <li><a href="#qhse" data-en="QHSE">QHSE</a></li>
+  <li><a href="#carrieres" data-en="Careers">Carrières</a></li>
+ </ul>
+ <div class="lang" role="group" aria-label="Langue"><button class="on" data-l="fr">FR</button><button data-l="en">EN</button></div>
+ <a class="btn b-or b-sm cta" href="#devis" data-en="Request a quote">Demander un devis</a>
+ <button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>
 
-<section class="hero" style="padding:0">
- <div class="bg" role="img" aria-label="Porte-conteneurs à quai au port d'Abidjan"></div>
- <span class="credit">Port d'Abidjan · photo Farid Mernissi, CC BY-SA 4.0</span>
+<nav class="drawer" id="drawer" aria-label="Menu">
+ <button class="burger x" id="close" aria-label="Fermer" style="display:grid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+ <a class="l" href="#services" data-en="Services">Services</a>
+ <a class="l" href="#entreposage" data-en="Warehousing">Entreposage</a>
+ <a class="l" href="#parcs" data-en="Our parks">Nos parcs</a>
+ <a class="l" href="#suivi" data-en="Tracking">Suivi d'expédition</a>
+ <a class="l" href="#qhse" data-en="QHSE">QHSE et certifications</a>
+ <a class="l" href="#carrieres" data-en="Careers">Carrières</a>
+ <a class="btn b-or" href="#devis" style="margin-top:24px;justify-content:center" data-en="Request a quote">Demander un devis</a>
+</nav>
+
+<main id="top">
+<!-- ACCUEIL -->
+<section class="hero" aria-label="Accueil">
+ <video id="hv" muted loop playsinline autoplay preload="auto" poster="assets/hero-169.jpg" aria-hidden="true"></video>
+ <button class="vctl" id="vctl" aria-label="Mettre la vidéo en pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
  <div class="in"><div class="wrap">
-  <div class="eye">Logisticien 3PL · Abidjan depuis 2013</div>
-  <h1><span class="l"><span>Du quai</span></span><span class="l"><span>à l'entrepôt,</span></span><span class="l"><span><em>maîtrisé.</em></span></span></h1>
-  <div class="row">
-   <p>Transport, entreposage et gestion de stock pour les industriels et les armateurs, avec quatre parcs à Abidjan et des moyens détenus en propre.</p>
-   <div class="ctas"><a class="btn b-or" href="#contact">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a><a class="btn b-gl" href="#parcs">Visiter nos parcs</a></div>
+  <div class="eye" data-en="3PL logistics provider · Abidjan since 2013">Logisticien 3PL · Abidjan depuis 2013</div>
+  <h1><span class="l"><span data-en="Your supply chain,">Votre chaîne d'approvisionnement,</span></span><span class="l"><span data-en="&lt;em&gt;mastered&lt;/em&gt; end to end."><em>maîtrisée</em> de bout en bout.</span></span></h1>
+  <p class="sub" data-en="Transport, warehousing and inventory management for industrial and commercial companies, with four logistics parks in Abidjan and equipment we own.">Transport, entreposage et gestion de stock pour les entreprises industrielles et commerciales, avec quatre parcs logistiques à Abidjan et des moyens détenus en propre.</p>
+  <div class="ctas">
+   <a class="btn b-or" href="#devis"><span data-en="Request a quote">Demander un devis</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+   <a class="btn b-gl" href="#entreposage" data-en="Visit our warehouses">Visiter nos entrepôts</a>
   </div>
-  <div class="stats">
-   <div><b class="cnt" data-n="113500">113 500</b><small>m² de surface totale</small></div>
-   <div><b class="cnt" data-n="40000">40 000</b><small>EVP transportés par an</small></div>
-   <div><b class="cnt" data-n="265">265</b><small>tracteurs et remorques</small></div>
-   <div><b class="cnt" data-n="4">4</b><small>parcs logistiques</small></div>
+  <div class="qbar" id="qbar">
+   <div class="qtabs" role="tablist">
+    <button class="on" data-q="0" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span data-en="Track a shipment">Suivre une expédition</span></button>
+    <button data-q="1" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg><span data-en="Quick quote">Devis rapide</span></button>
+    <button data-q="2" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg><span data-en="Book a visit">Planifier une visite</span></button>
+   </div>
+   <form class="qp on" id="q0" onsubmit="return goTrack(event)">
+    <label class="fld"><span data-en="Shipment, container or order number">Numéro d'expédition, de conteneur ou de commande</span><input id="qn" placeholder="ex. PRL-2611-0482" data-en-ph="e.g. PRL-2611-0482" autocomplete="off"></label>
+    <button class="btn b-or" type="submit"><span data-en="Track">Suivre</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
+   </form>
+   <form class="qp three" id="q1" onsubmit="return goQuote(event)">
+    <label class="fld"><span data-en="Service">Prestation</span><select id="qs">
+     <option data-en="Container transport">Transport de conteneurs</option><option data-en="Fuel transport">Transport d'hydrocarbures</option><option data-en="Out-of-gauge cargo">Colis hors-gabarit</option><option data-en="Pallet or parcel distribution">Distribution palette ou colis</option><option data-en="Warehousing">Entreposage</option><option data-en="Inventory management / WMS">Gestion de stock / WMS</option><option data-en="Container yard">Parc à conteneurs</option><option data-en="Full 3PL solution">Solution 3PL globale</option></select></label>
+    <label class="fld"><span data-en="From">Départ</span><input id="qf" placeholder="Port d'Abidjan" data-en-ph="Port of Abidjan"></label>
+    <label class="fld"><span data-en="To">Arrivée</span><input id="qt" placeholder="Yopougon, Bouaké, Ouagadougou…" data-en-ph="Yopougon, Bouaké, Ouagadougou…"></label>
+    <button class="btn b-or" type="submit"><span data-en="Continue">Continuer</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
+   </form>
+   <form class="qp" id="q2" onsubmit="return goVisit(event)">
+    <label class="fld"><span data-en="Park you would like to visit">Parc à visiter</span><select id="qv"><option>Vridi</option><option>Yopougon</option><option>AeroHub</option><option data-en="Not sure yet">Je ne sais pas encore</option></select></label>
+    <button class="btn b-or" type="submit"><span data-en="Book">Planifier</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
+   </form>
   </div>
  </div></div>
+ <span class="vnote" data-en="Some footage is illustrative">Certaines images sont des images d'illustration</span>
 </section>
 
-<div class="mq"><div class="t">
- <span>Maersk</span><span>CMA CGM</span><span>Nestlé</span><span>TotalEnergies</span><span>Hapag-Lloyd</span><span>Cargill</span><span>CEVA Logistics</span><span>SAPH</span><span>Sania</span><span>Barry Callebaut</span><span>FrieslandCampina</span><span>MEDLOG</span>
- <span>Maersk</span><span>CMA CGM</span><span>Nestlé</span><span>TotalEnergies</span><span>Hapag-Lloyd</span><span>Cargill</span><span>CEVA Logistics</span><span>SAPH</span><span>Sania</span><span>Barry Callebaut</span><span>FrieslandCampina</span><span>MEDLOG</span>
-</div></div>
-
-<section class="mani"><div class="wrap">
- <div class="rv"><div class="eye">Qui nous sommes</div><h2 class="h2">Un seul interlocuteur pour <em>toute</em> la chaîne.</h2></div>
- <p class="big rv d2">Depuis 2013, Proline Logistics conçoit et opère des solutions intégrées alliant <b>performance, transparence et innovation</b>. Flotte, chariots, entrepôts et logiciels métier : l'essentiel est à nous, et chaque flux se mesure.</p>
+<!-- CHIFFRES -->
+<section class="nums" aria-label="Chiffres clés"><div class="wrap">
+ <div class="head rv"><div><div class="eye" data-en="Key figures">Quelques chiffres</div><h2 class="h2" data-en="Capacity sized for &lt;em&gt;your volumes&lt;/em&gt;.">Des moyens à la mesure de <em>vos volumes</em>.</h2></div><p class="lead" data-en="Owned infrastructure and equipment, measured flow by flow.">Une infrastructure et des équipements détenus en propre, mesurés flux par flux.</p></div>
+ <div class="ng">
+  <div class="rv"><b><span class="cnt" data-n="43000">43 000</span><i>m²</i></b><span data-en="of racked warehouses">d'entrepôts équipés de racks</span></div>
+  <div class="rv d1"><b><span class="cnt" data-n="70000">70 000</span><i>m²</i></b><span data-en="of open storage yard">de terre-plein</span></div>
+  <div class="rv d2"><b><span class="cnt" data-n="7000">7 000</span></b><span data-en="pallet positions at the AeroHub">places palettes à l'AeroHub</span></div>
+  <div class="rv"><b><span class="cnt" data-n="2.5" data-d="1">2,5</span><i data-en="to 45 t">à 45 t</i></b><span data-en="forklifts, 30 owned units">chariots élévateurs, 30 en propre</span></div>
+  <div class="rv d1"><b><span class="cnt" data-n="80000">80 000</span><i>m³</i></b><span data-en="of fuel transported per year">d'hydrocarbures transportés par an</span></div>
+  <div class="rv d2"><b><span class="cnt" data-n="2013" data-y="1">2013</span></b><span data-en="in Abidjan since">implantés à Abidjan depuis</span></div>
+ </div>
 </div></section>
 
-<section class="svc" id="metiers"><div class="wrap">
- <div class="rv"><div class="eye">Nos métiers</div><h2 class="h2">Deux métiers, une seule chaîne.</h2></div>
- <div class="tabs">
-  <div class="tl rv">
-   <button class="on" data-t="0"><small>01</small><span>Transport</span></button>
-   <button data-t="1"><small>02</small><span>Entreposage et stock</span></button>
-   <button data-t="2"><small>03</small><span>Technologie et équipes</span></button>
+<!-- SERVICES -->
+<section class="light" id="services"><div class="wrap">
+ <div class="head rv"><div><div class="eye" data-en="What we do">Nos métiers</div><h2 class="h2" data-en="An integrated 3PL offer, from quay to delivery.">Une offre 3PL intégrée, du quai à la livraison.</h2></div><p class="lead" data-en="One partner for the whole chain, backed by our own fleet, warehouses and business software.">Un seul interlocuteur pour toute la chaîne, appuyé sur notre flotte, nos entrepôts et nos logiciels métier.</p></div>
+ <div class="cards">
+  <article class="card wide rv" tabindex="0"><img src="assets/port-navire.jpg" alt="Porte-conteneurs à quai" loading="lazy">
+   <div class="c"><small>01 · TRANSPORT</small><h3 data-en="Container transport">Transport de conteneurs</h3><p data-en="Road haulage across West African corridors, with GPS tracking and real-time reporting.">Acheminement routier sur les corridors d'Afrique de l'Ouest, avec suivi GPS et reporting en temps réel.</p>
+   <span class="kpi"><b>40 000</b> <span data-en="TEU per year">EVP par an</span></span>
+   <ul><li data-en="20' and 40' containers">Conteneurs 20 et 40 pieds</li><li data-en="265 tractors and trailers">265 tracteurs et remorques</li><li data-en="GPS tracking and real-time reporting">Suivi GPS et reporting temps réel</li></ul></div></article>
+  <article class="card rv d1" tabindex="0"><img src="assets/transport-citerne.jpg" alt="Camion-citerne Proline" loading="lazy">
+   <div class="c"><small>02 · TRANSPORT</small><h3 data-en="Fuel transport">Transport d'hydrocarbures</h3><p data-en="A dedicated tanker fleet for fuel products.">Une flotte de citernes dédiée aux produits pétroliers.</p>
+   <span class="kpi"><b>80 000 m³</b> <span data-en="per year">par an</span></span>
+   <ul><li data-en="Trained, safety-certified drivers">Chauffeurs formés à la sécurité</li><li data-en="GPS tracking">Suivi GPS</li></ul></div></article>
+  <article class="card rv" tabindex="0"><img src="assets/transport-hors-gabarit.jpg" alt="Colis industriel hors-gabarit" loading="lazy">
+   <div class="c"><small>03 · TRANSPORT</small><h3 data-en="Out-of-gauge cargo">Colis hors-gabarit</h3><p data-en="Heavy and exceptional loads, with handling equipment up to 45 t.">Charges lourdes et exceptionnelles, avec des moyens de manutention jusqu'à 45 t.</p>
+   <ul><li data-en="Exceptional loads">Charges exceptionnelles</li><li data-en="Forklifts from 2.5 to 45 t">Chariots de 2,5 à 45 t</li></ul></div></article>
+  <article class="card rv d1" tabindex="0"><img src="assets/entrepot-rack.jpg" alt="Entrepôt à rayonnages hauts" loading="lazy">
+   <div class="c"><small>04 · ENTREPOSAGE</small><h3 data-en="Warehousing &amp; inventory">Entreposage et stock</h3><p data-en="WMS-driven inventory, FIFO / FEFO, daily report.">Gestion inventoriée pilotée par WMS, FIFO / FEFO, rapport journalier.</p>
+   <span class="kpi"><b>43 000 m²</b> <span data-en="racked">rackés</span></span>
+   <ul><li data-en="Receiving, quality and quantity checks">Réception, contrôle qualité et quantité</li><li data-en="Order picking">Préparation de commande</li><li data-en="Cross physical / system inventory">Inventaire croisé physique / informatique</li></ul></div></article>
+  <article class="card rv d2" tabindex="0"><img src="assets/entrepot-cartons.jpg" alt="Entrepôt de stockage" loading="lazy">
+   <div class="c"><small>05 · DISTRIBUTION</small><h3 data-en="Pallet &amp; parcel distribution">Distribution palette et colis</h3><p data-en="Your orders prepared and delivered to your customers, in Abidjan or along the corridors.">Vos commandes préparées et livrées à vos clients, à Abidjan ou sur les corridors.</p>
+   <ul><li data-en="Pallet or parcel">À la palette ou au colis</li><li data-en="Delivery tracking">Suivi de livraison</li></ul></div></article>
+ </div>
+ <div class="tech">
+  <div class="rv"><b>TMS</b><span data-en="Transport management">Gestion du transport</span></div>
+  <div class="rv d1"><b>WMS</b><span data-en="Warehouse management">Gestion d'entrepôt</span></div>
+  <div class="rv d2"><b>GMAO</b><span data-en="Maintenance management">Gestion de la maintenance</span></div>
+  <div class="rv d3"><b>Tracking</b><span data-en="End-to-end traceability">Traçabilité de bout en bout</span></div>
+ </div>
+</div></section>
+
+<!-- ENTREPOSAGE -->
+<section class="ent" id="entreposage"><div class="wrap">
+ <div class="eg">
+  <div class="rv"><div class="eye" data-en="Warehousing in Abidjan">Entreposage à Abidjan</div><h2 class="h2" data-en="Your container reaches the port. &lt;em&gt;We take it from there.&lt;/em&gt;">Votre conteneur arrive au port. <em>Nous nous occupons de la suite.</em></h2>
+   <p class="pb" data-en="Importing is hard enough: a waiting container is costly, a miscounted stock loses sales. &lt;b&gt;Proline takes charge of your goods at the port and reports to you every day.&lt;/b&gt;">Importer, c'est déjà assez compliqué : un conteneur qui attend coûte cher, un stock mal compté fait rater des ventes. <b>Proline prend en charge votre marchandise dès le port, et vous rend compte chaque jour.</b></p>
+   <div class="ctas" style="display:flex;gap:12px;margin-top:30px;flex-wrap:wrap"><a class="btn b-or" href="#visite" data-en="Book a visit">Planifier une visite</a></div>
   </div>
-  <div class="rv d2">
-   <div class="tp on"><img src="assets/transport-citerne.jpg" alt="Camion-citerne Proline"><div><h3>Du conteneur au hors-gabarit.</h3><p>Acheminement de vos marchandises sur les corridors d'Afrique de l'Ouest, avec suivi GPS et reporting en temps réel.</p>
-    <ul><li>Transport de conteneurs<b>40 000 EVP / an</b></li><li>Transport d'hydrocarbures<b>80 000 m³ / an</b></li><li>Colis hors-gabarit et charges exceptionnelles<b>›</b></li><li>Distribution à la palette ou au colis<b>›</b></li></ul></div></div>
-   <div class="tp"><img src="assets/entrepot-rack.jpg" alt="Entrepôt racké"><div><h3>De la réception à l'expédition.</h3><p>Une infrastructure sécurisée et une gestion inventoriée pilotée par WMS, avec traçabilité de bout en bout.</p>
-    <ul><li>Entrepôts équipés de racks<b>43 000 m²</b></li><li>Terre-plein<b>70 000 m²</b></li><li>Places palettes au hub aéroportuaire<b>7 000</b></li><li>Picking, FIFO / FEFO, inventaire croisé<b>Rapport journalier</b></li></ul></div></div>
-   <div class="tp"><img src="assets/gestion-stock-cariste.jpg" alt="Cariste en opération"><div><h3>Des outils et des gens formés.</h3><p>Un système d'information dédié et des équipes en formation continue sur la sécurité et les procédures clients.</p>
-    <ul><li>TMS · WMS · GMAO · tracking<b>Logiciels métier</b></li><li>Chariots élévateurs, 2,5 à 45 tonnes<b>30</b></li><li>Caristes, magasiniers, chauffeurs<b>CACES</b></li><li>Département QHSE<b>Toutes procédures</b></li></ul></div></div>
+  <div class="ph rv d2"><img src="assets/entrepot-rack.jpg" alt="Allée à rayonnages hauts" loading="lazy"></div>
+ </div>
+ <div class="steps" id="steps">
+  <div class="step rv"><div class="n">1</div><h4 data-en="We collect your container">Nous enlevons votre conteneur</h4><p data-en="From the port to our Vridi park nearby, or to Yopougon. GPS-tracked.">Du port vers notre parc de Vridi, tout proche, ou vers Yopougon. Suivi GPS pendant le trajet.</p></div>
+  <div class="step rv d1"><div class="n">2</div><h4 data-en="We unload and check">Nous déchargeons et contrôlons</h4><p data-en="Every arrival is checked for quantity and quality. You are told about any gap.">Chaque arrivée est vérifiée en quantité et en qualité. Vous êtes prévenu de tout écart.</p></div>
+  <div class="step rv d2"><div class="n">3</div><h4 data-en="We store, at an exact slot">Nous stockons, à une place précise</h4><p data-en="Each pallet is logged in our WMS. FIFO / FEFO: first in or first to expire ships first.">Chaque palette est enregistrée dans notre WMS. FIFO / FEFO : ce qui doit sortir en premier sort en premier.</p></div>
+  <div class="step rv d3"><div class="n">4</div><h4 data-en="We count, and tell you">Nous comptons, et vous le disons</h4><p data-en="Physical stock is reconciled with the system. You get a report every day.">Le stock physique est rapproché du stock informatique. Vous recevez un rapport chaque jour.</p></div>
+  <div class="step rv d3"><div class="n">5</div><h4 data-en="We prepare and ship">Nous préparons et expédions</h4><p data-en="By pallet or parcel, to your customers in Abidjan or along West African corridors.">À la palette ou au colis, vers vos clients à Abidjan ou sur les corridors d'Afrique de l'Ouest.</p></div>
+ </div>
+ <div class="why">
+  <div class="rv"><b data-en="Equipment we own">Matériel en propre</b><span data-en="30 forklifts from 2.5 to 45 tonnes, for every type of load.">30 chariots de 2,5 à 45 tonnes, pour toutes les charges.</span></div>
+  <div class="rv d1"><b data-en="Trained teams">Équipes formées</b><span data-en="CACES-certified forklift drivers, storekeepers and drivers in continuous training.">Caristes CACES, magasiniers et chauffeurs en formation continue.</span></div>
+  <div class="rv d2"><b data-en="QHSE in every procedure">Le QHSE dans chaque procédure</b><span data-en="Our QHSE department is involved in all our procedures.">Notre département QHSE intervient dans la totalité de nos procédures.</span></div>
+  <div class="rv d3"><b data-en="Port and airport sites">Sites portuaire et aéroportuaire</b><span data-en="Vridi near the port, the AeroHub near the airport.">Vridi près du port, l'AeroHub près de l'aéroport.</span></div>
+ </div>
+ <div class="visit" id="visite">
+  <div class="rv"><div class="eye" data-en="Visit">Visite</div><h3 class="h2" style="font-size:clamp(32px,3.6vw,52px)" data-en="Come and see before you decide.">Venez voir avant de décider.</h3>
+   <p class="lead" style="margin-top:18px" data-en="In one hour, at the park of your choice:">En une heure, sur le parc de votre choix :</p>
+   <ul>
+    <li data-en="the storage areas and racks;">les zones de stockage et les racks ;</li>
+    <li data-en="the receiving and checking of an arrival;">la réception et le contrôle d'un arrivage ;</li>
+    <li data-en="the stock tracking screen, as you will see it;">l'écran de suivi du stock, tel que vous le verrez ;</li>
+    <li data-en="a conversation with the operations manager about your volumes.">un échange avec le responsable d'exploitation sur vos volumes.</li>
+   </ul>
+   <a class="btn b-or" href="#devis" style="margin-top:28px" onclick="preset('visite')" data-en="Book my visit">Planifier ma visite</a>
+  </div>
+  <div class="faq rv d2">
+   <details open><summary data-en="What products do you store?">Quels produits stockez-vous ?</summary><p data-en="We serve agribusiness, FMCG, pharmaceuticals, electronics and industry, agricultural commodities and fuel.">Nous servons l'agro-industrie, la grande consommation, la pharmacie, l'électronique et l'industrie, les matières premières agricoles et les hydrocarbures.</p></details>
+   <details><summary data-en="Can you collect my container at the port?">Pouvez-vous aller chercher mon conteneur au port ?</summary><p data-en="Yes. We haul 20' and 40' containers, GPS-tracked, to our parks.">Oui. Nous transportons les conteneurs de 20 et 40 pieds, avec un suivi GPS, jusqu'à nos parcs.</p></details>
+   <details><summary data-en="How do I follow my stock?">Comment suivre mon stock ?</summary><p data-en="Through a daily report from our WMS, reconciled with the physical inventory.">Par un rapport quotidien issu de notre logiciel de gestion d'entrepôt, rapproché de l'inventaire physique.</p></details>
+   <details><summary data-en="When can I visit?">Quand peut-on visiter ?</summary><p data-en="Monday to Friday 8 am – 6 pm, Saturday 8 am – 1 pm, by appointment.">Du lundi au vendredi de 8 h à 18 h, le samedi de 8 h à 13 h, sur rendez-vous.</p></details>
   </div>
  </div>
 </div></section>
 
-<section class="flux" id="flux"><div class="wrap">
- <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Votre flux</div><h2 class="h2">Le trajet de votre marchandise.</h2></div><p class="lead">Chaque étape est prise en charge par nos moyens et suivie dans nos outils, du déchargement à la livraison.</p></div>
- <div class="steps">
-  <div class="st rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17h18l-2 4H5zM6 17V9h12v8M9 9V5h6v4"/></svg></div><h4>Prise en charge</h4><p>Au port, à l'aéroport ou chez vous : conteneur, citerne ou colis hors-gabarit.</p></div>
-  <div class="st rv d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h12v10H2zM14 10h4l3 3v4h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><h4>Transport suivi</h4><p>Suivi GPS et reporting en temps réel sur tout le trajet.</p></div>
-  <div class="st rv d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><h4>Réception contrôlée</h4><p>Déchargement, contrôle qualité et quantité, mise en stock.</p></div>
-  <div class="st rv d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V8l9-5 9 5v13M7 21v-8h10v8M7 17h10"/></svg></div><h4>Stock piloté</h4><p>WMS, FIFO / FEFO, inventaire croisé et rapport journalier.</p></div>
-  <div class="st rv d4"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg></div><h4>Préparation et livraison</h4><p>Picking, préparation de commande, distribution palette ou colis.</p></div>
- </div>
-</div></section>
-
-<section class="nums" style="padding-top:40px"><div class="wrap">
- <div class="rv"><div class="eye">En chiffres</div><h2 class="h2">Des moyens à la mesure <em>de vos volumes.</em></h2></div>
- <div class="g">
-  <div class="rv"><b><span class="cnt" data-n="43000">43 000</span><i>m²</i></b><span>d'entrepôts rackés</span></div>
-  <div class="rv d1"><b><span class="cnt" data-n="70000">70 000</span><i>m²</i></b><span>de terre-plein</span></div>
-  <div class="rv d2"><b><span class="cnt" data-n="80000">80 000</span><i>m³</i></b><span>d'hydrocarbures transportés par an</span></div>
-  <div class="rv"><b><span class="cnt" data-n="265">265</span></b><span>tracteurs et remorques</span></div>
-  <div class="rv d1"><b><span class="cnt" data-n="30">30</span></b><span>chariots élévateurs, de 2,5 à 45 tonnes</span></div>
-  <div class="rv d2"><b><span class="cnt" data-n="7000">7 000</span></b><span>places palettes au hub aéroportuaire</span></div>
- </div>
- <p class="note">Chiffres repris du site actuel de Proline Logistics, mis à jour avant la mise en ligne.</p>
-</div></section>
-
-<section class="parcs" id="parcs"><div class="wrap">
- <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Implantations</div><h2 class="h2">Quatre parcs, placés pour raccourcir vos corridors.</h2></div><p class="lead">Zone industrielle, port, aéroport et une réserve d'extension. Cliquez sur un parc.</p></div>
+<!-- PARCS -->
+<section id="parcs"><div class="wrap">
+ <div class="head rv"><div><div class="eye" data-en="Where we are">Où sommes-nous</div><h2 class="h2" data-en="Four parks at Abidjan's &lt;em&gt;key points&lt;/em&gt;.">Quatre parcs aux <em>points névralgiques</em> d'Abidjan.</h2></div><p class="lead" data-en="Industrial zone, port and airport: each corridor gets shorter.">Zone industrielle, port et aéroport : chaque corridor se raccourcit.</p></div>
  <div class="pg">
-  <div class="map rv">
-   <svg viewBox="0 0 600 520" aria-label="Schéma des quatre parcs à Abidjan">
-    <defs><pattern id="gr" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0v30" fill="none" stroke="rgba(255,255,255,.05)"/></pattern></defs>
-    <rect width="600" height="520" fill="url(#gr)"/>
-    <path d="M0 300 C120 270 200 330 300 300 S470 250 600 285 L600 345 C470 320 380 365 300 360 S110 335 0 360Z" fill="#163447"/>
-    <path d="M0 430 C150 415 300 440 600 420 L600 520 0 520Z" fill="#12293a"/>
-    <text x="440" y="490" fill="#3f6680" font-family="Space Grotesk" font-size="13" letter-spacing="3">GOLFE DE GUINÉE</text>
-    <text x="40" y="335" fill="#3f6680" font-family="Space Grotesk" font-size="13" letter-spacing="3">LAGUNE ÉBRIÉ</text>
-    <path d="M150 170 C230 220 300 260 330 380 M330 380 C380 330 420 300 470 395 M150 170 C120 230 110 260 90 250" fill="none" stroke="rgba(238,91,34,.35)" stroke-width="2" stroke-dasharray="6 7"/>
-    <g class="pin on" data-p="0"><circle class="p" cx="150" cy="170" r="14"/><circle class="c" cx="150" cy="170" r="11"/><text x="172" y="165">Yopougon</text></g>
-    <g class="pin" data-p="1"><circle class="p" cx="330" cy="380" r="14"/><circle class="c" cx="330" cy="380" r="11"/><text x="350" y="375">Vridi · port</text></g>
-    <g class="pin" data-p="2"><circle class="p" cx="470" cy="395" r="14"/><circle class="c" cx="470" cy="395" r="11"/><text x="420" y="430">AeroHub</text></g>
-    <g class="pin" data-p="3"><circle class="p" cx="90" cy="250" r="14"/><circle class="c" cx="90" cy="250" r="11"/><text x="40" y="225">Ndotre</text></g>
-   </svg>
-   <span class="mapnote">Schéma indicatif, positions non à l'échelle</span>
-  </div>
-  <div class="pl">
-   <button class="pc on" data-p="0"><div class="top"><div><small>01 · SIÈGE</small><h3>Parc Yopougon</h3></div><span class="sz">72 000 m²</span></div><ul><li>33 000 m² d'entrepôt</li><li>30 000 m² de parc à conteneurs</li><li>9 000 m² de zone technique et maintenance</li><li>Bureaux de 400 m²</li></ul></button>
-   <button class="pc" data-p="1"><div class="top"><div><small>02 · PORT</small><h3>Parc Vridi</h3></div><span class="sz">20 000 m²</span></div><ul><li>10 000 m² d'entrepôt</li><li>10 000 m² de parc à conteneurs</li><li>Bureaux de 300 m²</li><li>Proximité portuaire</li></ul></button>
-   <button class="pc" data-p="2"><div class="top"><div><small>03 · AÉROPORT</small><h3>Zone AeroHub</h3></div><span class="sz">1,5 ha</span></div><ul><li>4 500 m² d'entrepôts logistiques</li><li>7 000 places palettes</li><li>Opéré avec CEVA Logistics</li></ul></button>
-   <button class="pc" data-p="3"><div class="top"><div><small>04 · EXTENSION</small><h3>Terrain Ndotre</h3></div><span class="sz">20 000 m²</span></div><ul><li>Parc à conteneurs</li><li>Projet logistique sur 2 ha</li><li>Lancé en 2024</li></ul></button>
-   <a class="btn b-or" href="#contact" style="justify-self:start;margin-top:10px">Planifier une visite <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+  <div class="rv"><div id="map" role="region" aria-label="Carte des parcs"></div><p class="mapnote" data-en="Location shown by district.">Emplacement indiqué par quartier.</p></div>
+  <div class="pl rv d2">
+   <button class="pc on" data-p="0"><div class="top"><div><small>01</small><h3 data-en="Yopougon park">Parc Yopougon</h3></div><span class="sz">72 000 m²</span></div><ul><li data-en="33,000 m² of warehouses">33 000 m² d'entrepôt</li><li data-en="30,000 m² container yard">30 000 m² de parc à conteneurs</li><li data-en="9,000 m² technical and maintenance area">9 000 m² de zone technique et maintenance</li><li data-en="400 m² of offices">Bureaux de 400 m²</li></ul></button>
+   <button class="pc" data-p="1"><div class="top"><div><small>02</small><h3 data-en="Vridi park">Parc Vridi</h3></div><span class="sz">20 000 m²</span></div><ul><li data-en="10,000 m² of warehouses">10 000 m² d'entrepôt</li><li data-en="10,000 m² container yard">10 000 m² de parc à conteneurs</li><li data-en="300 m² of offices">Bureaux de 300 m²</li><li data-en="Next to the port">Proximité portuaire</li></ul></button>
+   <button class="pc" data-p="2"><div class="top"><div><small>03</small><h3 data-en="AeroHub zone">Zone AeroHub</h3></div><span class="sz">1,5 ha</span></div><ul><li data-en="4,500 m² of logistics warehouses">4 500 m² d'entrepôts logistiques</li><li data-en="7,000 pallet positions">7 000 places palettes</li><li data-en="Next to the airport">Proximité aéroportuaire</li></ul></button>
+   <button class="pc" data-p="3"><div class="top"><div><small>04</small><h3 data-en="Ndotre site">Terrain Ndotre</h3></div><span class="sz">20 000 m²</span></div><ul><li data-en="Container yard">Parc à conteneurs</li><li data-en="2 ha logistics project, launched in 2024">Projet logistique sur 2 ha, lancé en 2024</li><li data-en="Room to expand">Capacité d'extension</li></ul></button>
   </div>
  </div>
 </div></section>
 
-<section><div class="wrap">
- <div class="rv"><div class="eye">Sur le terrain</div><h2 class="h2">Nos opérations, sans mise en scène.</h2></div>
- <div class="gal">
-  <figure class="rv"><img src="assets/entrepot-cartons.jpg" alt="Réception en entrepôt"><figcaption>Réception et contrôle<small>Entrepôt Proline</small></figcaption></figure>
-  <figure class="rv d1"><img src="assets/entrepot-rack.jpg" alt="Allée rackée"><figcaption>Stockage racké<small>43 000 m²</small></figcaption></figure>
-  <figure class="rv"><img src="assets/gestion-stock-cariste.jpg" alt="Cariste"><figcaption>Manutention<small>Caristes CACES</small></figcaption></figure>
-  <figure class="rv d1"><img src="assets/transport-hors-gabarit.jpg" alt="Colis hors-gabarit"><figcaption>Hors-gabarit<small>Charges exceptionnelles</small></figcaption></figure>
-  <figure class="rv d2"><img src="assets/transport-citerne.jpg" alt="Camion-citerne"><figcaption>Hydrocarbures<small>80 000 m³ par an</small></figcaption></figure>
- </div>
-</div></section>
-
-<section class="hist" id="histoire" style="padding-top:40px"><div class="wrap">
- <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Notre histoire</div><h2 class="h2">D'un entrepôt à quatre parcs.</h2></div><p class="lead">Chaque étape a ajouté une capacité pour les industriels et les armateurs.</p></div>
- <div class="track rv d1">
-  <div class="yr"><b>2014</b><p>Premiers entrepôts sur 6 000 m² en zone industrielle de Yopougon.</p></div>
-  <div class="yr"><b>2015</b><p>Lancement du transport de conteneurs, entrepôts étendus à 15 000 m².</p></div>
-  <div class="yr"><b>2016</b><p>Terre-plein conteneurs de 18 000 m² et 9 000 m² d'entrepôts supplémentaires.</p></div>
-  <div class="yr"><b>2018</b><p>Transport d'hydrocarbures pour TotalEnergies, hub logistique de 12 000 m² à Yopougon.</p></div>
-  <div class="yr"><b>2021</b><p>Hub portuaire de 20 000 m², dont 10 000 m² d'entrepôt racké.</p></div>
-  <div class="yr"><b>2024</b><p>Hub aéroportuaire de 7 000 places palettes avec CEVA, projet Ndotre sur 2 ha.</p></div>
- </div>
-</div></section>
-
-<section class="cl" id="clients"><div class="wrap">
- <div style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap" class="rv"><div><div class="eye">Références</div><h2 class="h2" style="color:var(--ink)">Ils nous confient leurs flux.</h2></div><p class="lead" style="color:#5f7488">Armateurs internationaux, agro-industrie et grande consommation : une même exigence de fiabilité.</p></div>
- <div class="lg rv d1"><div>Maersk</div><div>CMA CGM</div><div>Hapag-Lloyd</div><div>MEDLOG</div><div>CEVA Logistics</div><div>Nestlé</div><div>Cargill</div><div>TotalEnergies</div><div>SAPH</div><div>Sania</div><div>SACO · Barry Callebaut</div><div>FrieslandCampina</div></div>
- <div class="q3">
-  <div class="rv"><b>ISO 9001</b><p>Qualité · démarche de certification engagée</p></div>
-  <div class="rv d1"><b>ISO 14001</b><p>Environnement · démarche de certification engagée</p></div>
-  <div class="rv d2"><b>ISO 45001</b><p>Santé et sécurité au travail · démarche engagée</p></div>
- </div>
- <div class="sect rv"><span>Agro-industrie</span><span>FMCG</span><span>Pharmaceutique</span><span>Électronique et industriel</span><span>Matières premières agricoles</span><span>Hydrocarbures</span></div>
-</div></section>
-
-<section class="cta" id="contact" style="padding:130px 0 0"><div class="wrap"><div class="box">
- <div class="in">
-  <div class="rv"><div class="eye">Contact</div><h2 style="margin-top:20px">Externalisez votre logistique, en confiance.</h2><p style="color:rgba(255,255,255,.75);margin-top:18px;max-width:440px">Nos équipes vous recontactent sous 24 heures ouvrées pour étudier vos besoins.</p>
-   <div class="co">
-    <a href="tel:+2252723465743"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+225 27 23 46 57 43</a>
-    <a href="mailto:info@prolinelogistic.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>info@prolinelogistic.com</a>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.3A7 7 0 0 1 19 9.7C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/></svg>Zone industrielle Yopougon, 23 BP 3935 Abidjan 25</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Lun – Ven 8 h – 18 h · Sam 8 h – 13 h</div>
+<!-- SUIVI -->
+<section class="light" id="suivi"><div class="wrap">
+ <div class="trk">
+  <div class="rv"><div class="eye" data-en="Shipment tracking">Suivi d'expédition</div><h2 class="h2" data-en="Know where your goods are, at all times.">Savoir où est votre marchandise, à tout moment.</h2>
+   <p class="lead" style="margin-top:20px" data-en="Every trip is GPS-tracked and every pallet logged in our WMS. Your shipment, from the port gate to delivery, on one screen.">Chaque trajet est suivi par GPS et chaque palette enregistrée dans notre WMS. Votre expédition, de la sortie du port à la livraison, sur un seul écran.</p></div>
+  <div class="tbox rv d2">
+   <form class="tform" onsubmit="return track(event)">
+    <label class="fld"><span data-en="Shipment, container or order number">Numéro d'expédition, de conteneur ou de commande</span><input id="tn" placeholder="ex. PRL-2611-0482" data-en-ph="e.g. PRL-2611-0482" autocomplete="off"></label>
+    <button class="btn b-or" type="submit" style="align-self:end" data-en="Track">Suivre</button>
+   </form>
+   <div class="tres on" id="tres">
+    <div class="thd"><div><span style="font-size:12px;color:#7a8da0" data-en="Shipment">Expédition</span><br><b id="tref">PRL-2611-0482</b></div><span class="badge" data-en="In transit">En transit</span></div>
+    <ol class="tl">
+     <li class="d"><div><b data-en="Picked up at the port">Enlevé au port</b><span data-en="Port of Abidjan · 40' container">Port d'Abidjan · conteneur 40 pieds</span></div><time>08:12</time></li>
+     <li class="d"><div><b data-en="Received at Vridi park">Réceptionné au parc Vridi</b><span data-en="Quantity and quality checked">Contrôle quantité et qualité effectué</span></div><time>09:05</time></li>
+     <li class="c"><div><b data-en="In transit to the customer">En route vers le client</b><span data-en="GPS position updated in real time">Position GPS actualisée en temps réel</span></div><time>11:40</time></li>
+     <li><div><b data-en="Delivered">Livré</b><span data-en="Proof of delivery">Preuve de livraison</span></div><time>—</time></li>
+    </ol>
+    <span class="demo-tag" data-en="Demonstration: on the live site, this screen is fed by Proline's TMS.">Démonstration : sur le site réel, cet écran est alimenté par le TMS de Proline.</span>
    </div>
   </div>
-  <form class="rv d2" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset()">
-   <label>NOM COMPLET<input required></label><label>ENTREPRISE<input></label>
-   <label>E-MAIL<input type="email" required></label><label>TÉLÉPHONE<input type="tel"></label>
-   <label class="f">BESOIN<select><option>Solution 3PL globale</option><option>Transport de conteneurs</option><option>Transport d'hydrocarbures</option><option>Transport hors-gabarit</option><option>Distribution palette ou colis</option><option>Entreposage</option><option>Gestion de stock / WMS</option><option>Parc à conteneurs</option><option>Visite d'un parc</option><option>Autre</option></select></label>
-   <label class="f">MESSAGE<textarea placeholder="Volumes, fréquence, type de marchandise…"></textarea></label>
-   <button class="btn b-or" type="submit" style="justify-self:start">Envoyer ma demande <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button>
-   <div class="ok">Votre demande a bien été enregistrée. Nos équipes vous recontactent sous 24 heures ouvrées.</div>
-   <small>En envoyant ce formulaire, vous acceptez d'être recontacté par nos équipes commerciales.</small>
-  </form>
  </div>
-</div></div></section>
+</div></section>
+
+<!-- DEVIS -->
+<section class="dv" id="devis"><div class="wrap">
+ <div class="dg">
+  <div class="rv"><div class="eye" data-en="Quote">Devis</div><h2 class="h2" data-en="Outsource your logistics &lt;em&gt;with confidence&lt;/em&gt;.">Externalisez votre logistique <em>en toute confiance</em>.</h2>
+   <p class="lead" style="margin-top:20px" data-en="Our team gets back to you within 24 business hours to study your transport, warehousing or inventory needs.">Notre équipe vous recontacte sous 24 heures ouvrées pour étudier vos besoins en transport, entreposage ou gestion de stock.</p>
+   <div class="co">
+    <a href="tel:+2252723465743"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><small data-en="Phone">Téléphone</small>+225 27 23 46 57 43</div></a>
+    <a href="mailto:info@prolinelogistic.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg><div><small>E-mail</small>info@prolinelogistic.com</div></a>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><small data-en="Address">Adresse</small><span data-en="Yopougon industrial zone">Zone industrielle Yopougon</span><br>23 BP 3935 Abidjan 25, Côte d'Ivoire</div></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><small data-en="Opening hours">Horaires</small><span data-en="Mon – Fri: 8 am – 6 pm · Sat: 8 am – 1 pm">Lun – Ven : 8 h – 18 h · Sam : 8 h – 13 h</span></div></div>
+   </div>
+   <button class="btn b-gl" style="margin-top:30px" onclick="wa()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg><span data-en="Write to us on WhatsApp">Nous écrire sur WhatsApp</span></button>
+  </div>
+  <div class="wiz rv d2" id="wiz">
+   <div class="prog"><i class="on"></i><i></i><i></i><i></i></div>
+   <div class="wst on" data-s="0"><h3 data-en="What do you need?">De quoi avez-vous besoin ?</h3><p class="s" data-en="Select one or more services.">Sélectionnez une ou plusieurs prestations.</p>
+    <div class="chips" id="needs">
+     <label><input type="checkbox" value="Transport de conteneurs"><span data-en="Container transport">Transport de conteneurs</span></label>
+     <label><input type="checkbox" value="Transport d'hydrocarbures"><span data-en="Fuel transport">Transport d'hydrocarbures</span></label>
+     <label><input type="checkbox" value="Colis hors-gabarit"><span data-en="Out-of-gauge cargo">Colis hors-gabarit</span></label>
+     <label><input type="checkbox" value="Distribution palette ou colis"><span data-en="Pallet or parcel distribution">Distribution palette ou colis</span></label>
+     <label><input type="checkbox" value="Entreposage"><span data-en="Warehousing">Entreposage</span></label>
+     <label><input type="checkbox" value="Gestion de stock / WMS"><span data-en="Inventory management / WMS">Gestion de stock / WMS</span></label>
+     <label><input type="checkbox" value="Parc à conteneurs"><span data-en="Container yard">Parc à conteneurs</span></label>
+     <label><input type="checkbox" value="Visite d'un parc"><span data-en="Visit a park">Visite d'un parc</span></label>
+    </div></div>
+   <div class="wst" data-s="1"><h3 data-en="Your flows">Vos flux</h3><p class="s" data-en="A rough idea is enough to start.">Un ordre de grandeur suffit pour commencer.</p>
+    <div class="r2"><label class="fld"><span data-en="From">Départ</span><input id="wf" placeholder="Port d'Abidjan" data-en-ph="Port of Abidjan"></label><label class="fld"><span data-en="To">Arrivée</span><input id="wt" placeholder="Yopougon, Bouaké…" data-en-ph="Yopougon, Bouaké…"></label></div>
+    <div class="r2"><label class="fld"><span data-en="Estimated volume">Volume estimé</span><input id="wv" placeholder="ex. 12 conteneurs / mois" data-en-ph="e.g. 12 containers / month"></label><label class="fld"><span data-en="Goods">Marchandise</span><select id="wg"><option data-en="Agribusiness">Agro-industrie</option><option data-en="FMCG">Grande consommation</option><option data-en="Pharmaceuticals">Pharmacie</option><option data-en="Electronics &amp; industrial">Électronique et industriel</option><option data-en="Agricultural commodities">Matières premières agricoles</option><option data-en="Fuel">Hydrocarbures</option><option data-en="Other">Autre</option></select></label></div>
+    <label class="fld"><span data-en="Preferred park">Parc souhaité</span><select id="wp"><option data-en="No preference">Pas de préférence</option><option>Vridi</option><option>Yopougon</option><option>AeroHub</option><option>Ndotre</option></select></label></div>
+   <div class="wst" data-s="2"><h3 data-en="Your details">Vos coordonnées</h3><p class="s" data-en="So that the right person calls you back.">Pour que la bonne personne vous rappelle.</p>
+    <div class="r2"><label class="fld"><span data-en="Full name">Nom complet</span><input id="wn" autocomplete="name"></label><label class="fld"><span data-en="Company">Entreprise</span><input id="wc" autocomplete="organization"></label></div>
+    <div class="r2"><label class="fld"><span>E-mail</span><input id="we" type="email" autocomplete="email"></label><label class="fld"><span data-en="Phone (WhatsApp)">Téléphone (WhatsApp)</span><input id="wph" type="tel" autocomplete="tel"></label></div>
+    <label class="fld"><span data-en="Message (optional)">Message (facultatif)</span><textarea id="wm" rows="3"></textarea></label></div>
+   <div class="wst" data-s="3"><h3 data-en="Check and send">Vérifiez et envoyez</h3><p class="s" data-en="We get back to you within 24 business hours.">Nous vous recontactons sous 24 heures ouvrées.</p>
+    <div class="recap" id="recap"></div>
+    <div class="ok" id="ok" data-en="Demonstration: on the live site, your request goes to the sales team at info@prolinelogistic.com.">Démonstration : sur le site réel, votre demande part à l'équipe commerciale, info@prolinelogistic.com.</div></div>
+   <div class="err" id="werr" aria-live="polite"></div>
+   <div class="wnav"><button class="btn b-ln" id="wb" style="visibility:hidden" data-en="Back">Retour</button><button class="btn b-or" id="wn2"><span data-en="Next">Suivant</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button></div>
+   <p style="font-size:12px;color:#7d8a96;margin-top:14px" data-en="By sending this form, you agree to be contacted by our sales teams.">En envoyant ce formulaire, vous acceptez d'être recontacté par nos équipes commerciales.</p>
+  </div>
+ </div>
+</div></section>
+
+<!-- QHSE -->
+<section class="light" id="qhse"><div class="wrap">
+ <div class="head rv"><div><div class="eye" data-en="QHSE &amp; certification">QHSE et certifications</div><h2 class="h2" data-en="Safety, quality and sustainable development.">Sécurité, qualité et développement durable.</h2></div><p class="lead" data-en="Risk control and rigorous governance guide all our actions.">La maîtrise des risques et une gouvernance rigoureuse guident l'ensemble de nos actions.</p></div>
+ <div class="qg">
+  <div class="iso rv"><div class="tag">ISO <i>9001</i></div><h4 data-en="Quality">Qualité</h4><p data-en="Consistent service quality, measured and improved.">Une qualité de service constante, mesurée et améliorée.</p><span class="st" data-en="CERTIFICATION PROCESS UNDERWAY">DÉMARCHE ENGAGÉE</span></div>
+  <div class="iso rv d1"><div class="tag">ISO <i>14001</i></div><h4 data-en="Environment">Environnement</h4><p data-en="Reducing the environmental footprint of our operations.">Réduire l'empreinte environnementale de nos opérations.</p><span class="st" data-en="CERTIFICATION PROCESS UNDERWAY">DÉMARCHE ENGAGÉE</span></div>
+  <div class="iso rv d2"><div class="tag">ISO <i>45001</i></div><h4 data-en="Occupational health &amp; safety">Santé et sécurité au travail</h4><p data-en="Protecting the people who work in our parks and on the road.">Protéger celles et ceux qui travaillent dans nos parcs et sur la route.</p><span class="st" data-en="CERTIFICATION PROCESS UNDERWAY">DÉMARCHE ENGAGÉE</span></div>
+ </div>
+ <div class="q2">
+  <div class="rv"><b data-en="QHSE department">Département QHSE</b><p data-en="Involved in every one of our procedures.">Il intervient dans la totalité de nos procédures.</p></div>
+  <div class="rv d1"><b data-en="Social responsibility (CSR)">Responsabilité (RSE)</b><p data-en="We aim for international standards confirming our social, societal and environmental commitments.">Nous visons des standards internationaux confirmant nos engagements sociaux, sociétaux et environnementaux.</p></div>
+  <div class="rv d2"><b data-en="Company spirit">Esprit d'entreprise</b><p data-en="Regular training, social dialogue and company culture.">Formations régulières, dialogue social et culture d'entreprise.</p></div>
+ </div>
+ <div class="sect rv"><span data-en="Agribusiness">Agro-industrie</span><span data-en="FMCG">Grande consommation</span><span data-en="Pharmaceuticals">Pharmaceutique</span><span data-en="Electronics &amp; industrial">Électronique et industriel</span><span data-en="Agricultural commodities">Matières premières agricoles</span><span data-en="Fuel">Hydrocarbures</span></div>
+</div></section>
+
+<!-- HISTOIRE -->
+<section id="histoire"><div class="wrap">
+ <div class="rv"><div class="eye" data-en="Our journey">Notre parcours</div><h2 class="h2" data-en="From one warehouse to &lt;em&gt;four parks&lt;/em&gt;.">D'un premier entrepôt à <em>quatre parcs</em>.</h2></div>
+ <div class="track">
+  <div class="yr rv"><b>2014</b><p data-en="First warehouses, 6,000 m², Yopougon industrial zone.">Premiers entrepôts sur 6 000 m² en ZI de Yopougon.</p></div>
+  <div class="yr rv d1"><b>2015</b><p data-en="Container transport launched; warehouses extended to 15,000 m².">Lancement du transport de conteneurs, entrepôts portés à 15 000 m².</p></div>
+  <div class="yr rv d2"><b>2016</b><p data-en="18,000 m² container yard and 9,000 m² of extra warehouses.">Terre-plein conteneurs de 18 000 m² et 9 000 m² d'entrepôts en plus.</p></div>
+  <div class="yr rv"><b>2018</b><p data-en="Fuel transport and a 12,000 m² logistics hub in Yopougon.">Transport d'hydrocarbures et hub logistique de 12 000 m² à Yopougon.</p></div>
+  <div class="yr rv d1"><b>2021</b><p data-en="20,000 m² port hub, including 10,000 m² of racked warehouse.">Hub portuaire de 20 000 m², dont 10 000 m² d'entrepôt racké.</p></div>
+  <div class="yr rv d2"><b>2024</b><p data-en="Airport hub (7,000 pallet positions) and the 2 ha Ndotre project.">Hub aéroportuaire (7 000 places palettes) et projet Ndotre sur 2 ha.</p></div>
+ </div>
+</div></section>
+
+<!-- CARRIERES -->
+<section class="light" id="carrieres"><div class="wrap">
+ <div class="head rv"><div><div class="eye" data-en="Careers">Carrières</div><h2 class="h2" data-en="Build the logistics of tomorrow with us.">Construisez avec nous la logistique de demain.</h2></div><p class="lead" data-en="Regular training, social dialogue and a demanding culture of safety.">Formations régulières, dialogue social et une culture exigeante de la sécurité.</p></div>
+ <div class="car">
+  <div class="ph rv"><img src="assets/cariste.jpg" alt="Cariste au volant d'un chariot élévateur" loading="lazy"></div>
+  <div class="jobs rv d2">
+   <a class="job" href="mailto:info@prolinelogistic.com?subject=Candidature%20cariste"><div><b data-en="Forklift drivers">Caristes</b><span data-en="CACES training, forklifts from 2.5 to 45 t">Formation CACES, chariots de 2,5 à 45 t</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+   <a class="job" href="mailto:info@prolinelogistic.com?subject=Candidature%20magasinier"><div><b data-en="Storekeepers">Magasiniers</b><span data-en="Receiving, WMS, picking, inventory">Réception, WMS, préparation, inventaire</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+   <a class="job" href="mailto:info@prolinelogistic.com?subject=Candidature%20chauffeur"><div><b data-en="Drivers">Chauffeurs</b><span data-en="Safety, customer procedures, responsible driving">Sécurité, procédures clients, conduite responsable</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+   <a class="job" href="mailto:info@prolinelogistic.com?subject=Candidature%20spontan%C3%A9e"><div><b data-en="Unsolicited application">Candidature spontanée</b><span data-en="Operations, QHSE, maintenance, sales">Exploitation, QHSE, maintenance, commercial</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a>
+  </div>
+ </div>
+</div></section>
+
+<!-- FIN -->
+<section class="final" style="padding-top:110px"><div class="wrap">
+ <div class="fbox rv"><div class="in"><h2 data-en="Your requirements, our performance.">Vos exigences, notre performance.</h2>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn b-or" href="#devis" data-en="Request a quote">Demander un devis</a><a class="btn b-gl" href="tel:+2252723465743">+225 27 23 46 57 43</a></div></div></div>
+</div></section>
+</main>
 
 <footer><div class="wrap">
- <div class="fbig">PROLINE LOGISTICS</div>
  <div class="fg">
-  <div><img src="assets/logo-clair.png" alt="Proline Logistics"><p>Prestataire logistique 3PL implanté à Abidjan depuis 2013 : transport, entreposage et gestion de stock.</p>
-   <div class="soc"><a href="https://www.linkedin.com/company/proline-logistics-ci" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a></div></div>
-  <div><h4>Métiers</h4><ul><li><a href="#metiers">Transport</a></li><li><a href="#metiers">Entreposage et stock</a></li><li><a href="#flux">Votre flux</a></li></ul></div>
-  <div><h4>Entreprise</h4><ul><li><a href="#histoire">Histoire</a></li><li><a href="#parcs">Implantations</a></li><li><a href="#clients">Références</a></li><li><a href="#contact">Contact</a></li></ul></div>
-  <div><h4>Contact</h4><ul><li><a href="tel:+2252723465743">+225 27 23 46 57 43</a></li><li><a href="mailto:info@prolinelogistic.com">info@prolinelogistic.com</a></li><li>Zone industrielle Yopougon<br>23 BP 3935 Abidjan 25, Côte d'Ivoire</li></ul></div>
+  <div><a class="logo" href="#top"><img src="assets/logo-clair.png" alt="Proline Logistics" width="134" height="48" loading="lazy"></a><p style="max-width:34ch" data-en="3PL logistics provider based in Abidjan since 2013: transport, warehousing and inventory management.">Prestataire logistique 3PL implanté à Abidjan depuis 2013 : transport, entreposage et gestion de stock.</p></div>
+  <div><h4 data-en="Services">Services</h4><ul><li><a href="#services" data-en="Transport">Transport</a></li><li><a href="#entreposage" data-en="Warehousing &amp; inventory">Entreposage et stock</a></li><li><a href="#suivi" data-en="Shipment tracking">Suivi d'expédition</a></li><li><a href="#devis" data-en="Quote">Devis</a></li></ul></div>
+  <div><h4 data-en="Company">Entreprise</h4><ul><li><a href="#histoire" data-en="Our journey">Notre parcours</a></li><li><a href="#parcs" data-en="Our parks">Nos parcs</a></li><li><a href="#qhse">QHSE</a></li><li><a href="#carrieres" data-en="Careers">Carrières</a></li></ul></div>
+  <div><h4>Contact</h4><ul><li><a href="tel:+2252723465743">+225 27 23 46 57 43</a></li><li><a href="mailto:info@prolinelogistic.com">info@prolinelogistic.com</a></li><li data-en="Yopougon industrial zone&lt;br&gt;23 BP 3935 Abidjan 25, Côte d'Ivoire">Zone industrielle Yopougon<br>23 BP 3935 Abidjan 25, Côte d'Ivoire</li></ul></div>
  </div>
- <div class="legal"><span>© 2026 Proline Logistics. Tous droits réservés. · <a href="#">Mentions légales</a></span><span>Photos du port : Farid Mernissi (CC BY-SA 4.0) et Romain Seaf (CC BY-SA 2.0), Wikimedia Commons</span></div>
+ <div class="legal"><span data-en="© 2026 Proline Logistics. All rights reserved.">© 2026 Proline Logistics. Tous droits réservés.</span><span data-en="Port photo: Farid Mernissi, CC BY-SA 4.0, Wikimedia Commons · Some video footage is illustrative">Photo du port : Farid Mernissi, CC BY-SA 4.0, Wikimedia Commons · Certaines images vidéo sont des images d'illustration</span></div>
 </div></footer>
 
+<button class="wa" onclick="wa()" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></button>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
-const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-const fmt=n=>n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
-const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,n=+el.dataset.n,t0=performance.now();co.unobserve(el);
- const f=t=>{const p=Math.min(1,(t-t0)/1600);el.textContent=fmt(Math.round(n*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.4});
-document.querySelectorAll('.cnt').forEach(el=>co.observe(el));
-document.querySelectorAll('.tl button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tl button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.tp').forEach((p,i)=>p.classList.toggle('on',i==b.dataset.t))});
-const sel=i=>{document.querySelectorAll('.pc').forEach(x=>x.classList.toggle('on',x.dataset.p==i));document.querySelectorAll('.pin').forEach(x=>x.classList.toggle('on',x.dataset.p==i))};
-document.querySelectorAll('.pc,.pin').forEach(el=>el.addEventListener('click',()=>sel(el.dataset.p)));
+(()=>{
+let LANG='fr';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const T=(fr,en)=>LANG=='en'?en:fr;
+// langue
+$$('[data-en]').forEach(e=>e.dataset.fr=e.innerHTML);
+$$('[data-en-ph]').forEach(e=>e.dataset.frPh=e.placeholder);
+function setLang(l){LANG=l;document.documentElement.lang=l;
+ $$('[data-en]').forEach(e=>e.innerHTML=l=='en'?e.dataset.en:e.dataset.fr);
+ $$('[data-en-ph]').forEach(e=>e.placeholder=l=='en'?e.dataset.enPh:e.dataset.frPh);
+ $$('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l==l));
+ document.title=T('Proline Logistics · Logisticien 3PL à Abidjan depuis 2013','Proline Logistics · 3PL logistics provider in Abidjan since 2013');
+ if(window._mk)_mk.forEach((m,i)=>m.setTooltipContent(T(P[i].fr,P[i].en)));
+ if(cur>=0)showStep(cur);
+ try{localStorage.setItem('pl-lang',l)}catch(e){}}
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+// navigation
+const nav=$('#nav');const onS=()=>nav.classList.toggle('s',scrollY>40);addEventListener('scroll',onS,{passive:true});onS();
+const dr=$('#drawer');$('#burger').onclick=()=>dr.classList.add('on');$('#close').onclick=()=>dr.classList.remove('on');
+$$('#drawer a').forEach(a=>a.addEventListener('click',()=>dr.classList.remove('on')));
+// vidéo d'accueil : format selon l'écran, pause si mouvement réduit
+const v=$('#hv'),port=matchMedia('(max-aspect-ratio:4/5)').matches,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+v.poster='assets/hero-'+(port?'916':'169')+'.jpg';
+if(!rm){v.src='assets/hero-'+(port?'916':'169')+'.mp4';v.play().catch(()=>{});}
+const vc=$('#vctl');const ico=p=>vc.innerHTML=p?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+if(rm)ico(false);
+vc.onclick=()=>{if(v.paused){if(!v.src)v.src='assets/hero-'+(port?'916':'169')+'.mp4';v.play();ico(true)}else{v.pause();ico(false)}};
+// apparition et compteurs
+const fmt=(n,d)=>n.toLocaleString(T('fr-FR','en-US'),{minimumFractionDigits:d||0,maximumFractionDigits:d||0}).replace(/\u202f|\u00a0/g,' ');
+const count=el=>{const n=+el.dataset.n,d=+(el.dataset.d||0),y=el.dataset.y,t0=performance.now(),from=y?n-12:0;
+ const f=t=>{const p=Math.min(1,(t-t0)/1700),e=1-Math.pow(1-p,3),x=from+(n-from)*e;el.textContent=y?Math.round(x):fmt(d?x:Math.round(x),d);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('on');e.target.querySelectorAll('.cnt').forEach(count);io.unobserve(e.target)}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
+const stp=$('#steps');new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){let p=0;const t=setInterval(()=>{p+=2;stp.style.setProperty('--p',p+'%');if(p>=100)clearInterval(t)},20);o.disconnect()}}),{threshold:.4}).observe(stp);
+// barre rapide
+$$('.qtabs button').forEach(b=>b.onclick=()=>{$$('.qtabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.qp').forEach((p,i)=>p.classList.toggle('on',i==b.dataset.q))});
+window.goTrack=e=>{e.preventDefault();$('#tn').value=$('#qn').value||'PRL-2611-0482';$('#suivi').scrollIntoView({behavior:'smooth'});setTimeout(()=>track(),500);return false};
+window.goQuote=e=>{e.preventDefault();const s=$('#qs').selectedIndex;const vals=['Transport de conteneurs',"Transport d'hydrocarbures",'Colis hors-gabarit','Distribution palette ou colis','Entreposage','Gestion de stock / WMS','Parc à conteneurs'];
+ $$('#needs input').forEach(i=>i.checked=i.value==vals[s]||(s==7));$('#wf').value=$('#qf').value;$('#wt').value=$('#qt').value;showStep(1);$('#devis').scrollIntoView({behavior:'smooth'});return false};
+window.goVisit=e=>{e.preventDefault();preset('visite');const p=$('#qv').value;[...$('#wp').options].forEach((o,i)=>{if(o.text==p)$('#wp').selectedIndex=i});showStep(1);$('#devis').scrollIntoView({behavior:'smooth'});return false};
+window.preset=k=>{if(k=='visite')$$('#needs input').forEach(i=>{if(i.value=="Visite d'un parc")i.checked=true})};
+// suivi (démonstration)
+window.track=e=>{if(e)e.preventDefault();const r=($('#tn').value||'PRL-2611-0482').trim().toUpperCase();$('#tref').textContent=r;const b=$('#tres');b.classList.remove('on');void b.offsetWidth;b.classList.add('on');return false};
+// devis en quatre étapes
+let cur=0;const st=$$('.wst'),pr=$$('.prog i'),wb=$('#wb'),wn=$('#wn2'),er=$('#werr');
+function showStep(i){cur=i;st.forEach((s,k)=>s.classList.toggle('on',k==i));pr.forEach((p,k)=>p.classList.toggle('on',k<=i));wb.style.visibility=i?'visible':'hidden';
+ wn.style.display='';wn.querySelector('span').textContent=i==3?T('Envoyer ma demande','Send my request'):T('Suivant','Next');er.textContent='';if(i==3)recap()}
+function recap(){const needs=$$('#needs input:checked').map(i=>i.nextElementSibling.textContent).join(', ')||'—';
+ const rows=[[T('Prestations','Services'),needs],[T('Trajet','Route'),($('#wf').value||'—')+' → '+($('#wt').value||'—')],[T('Volume','Volume'),$('#wv').value||'—'],[T('Marchandise','Goods'),$('#wg').selectedOptions[0].textContent],[T('Parc','Park'),$('#wp').selectedOptions[0].textContent],[T('Contact','Contact'),($('#wn').value||'—')+(($('#wc').value)?' · '+$('#wc').value:'')],['E-mail',$('#we').value||'—']];
+ const box=$('#recap');box.innerHTML='';rows.forEach(([a,b])=>{const d=document.createElement('div'),s=document.createElement('span'),x=document.createElement('b');s.textContent=a;x.textContent=b;d.append(s,x);box.append(d)})}
+wb.onclick=()=>showStep(Math.max(0,cur-1));
+wn.onclick=()=>{
+ if(cur==0&&!$$('#needs input:checked').length){er.textContent=T('Choisissez au moins une prestation.','Choose at least one service.');return}
+ if(cur==2){const em=$('#we').value.trim();if(!$('#wn').value.trim()||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent=T('Indiquez votre nom et un e-mail valide.','Please enter your name and a valid e-mail.');return}}
+ if(cur==3){$('#ok').style.display='block';wn.style.display='none';return}
+ showStep(cur+1)};
+// WhatsApp (démonstration)
+const toast=$('#toast');let tt;
+window.wa=()=>{toast.textContent=T("Démonstration : ce bouton ouvrira la conversation WhatsApp Business de Proline.","Demonstration: this button will open Proline's WhatsApp Business chat.");toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),3800)};
+// carte des parcs (emplacement par quartier)
+window.P=[{fr:'Parc Yopougon · 72 000 m²',en:'Yopougon park · 72,000 m²',c:[5.3555,-4.0835]},{fr:'Parc Vridi · 20 000 m²',en:'Vridi park · 20,000 m²',c:[5.2585,-4.0055]},{fr:'Zone AeroHub · 1,5 ha',en:'AeroHub zone · 1.5 ha',c:[5.2575,-3.9365]},{fr:'Terrain Ndotre · 20 000 m²',en:'Ndotre site · 20,000 m²',c:[5.4405,-4.0565]}];
+const cards=$$('.pc');let map=null;window._mk=[];
+function pick(i,fly){cards.forEach(c=>c.classList.toggle('on',+c.dataset.p==i));if(map&&fly)map.flyTo(P[i].c,14,{duration:1.1})}
+cards.forEach(c=>c.onclick=()=>pick(+c.dataset.p,true));
+if(window.L){map=L.map('map',{scrollWheelZoom:false,attributionControl:true});
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© contributeurs OpenStreetMap',maxZoom:19,className:'osm-dark'}).addTo(map);
+ const ic=L.divIcon({className:'',html:'<div class="pinm"></div>',iconSize:[22,22],iconAnchor:[11,11]});
+ P.forEach((p,i)=>{const m=L.marker(p.c,{icon:ic,keyboard:false}).addTo(map).bindTooltip(p.fr,{permanent:true,direction:[1,2].includes(i)&&innerWidth<640?(i==1?'left':'bottom'):(i==1?'left':'right'),offset:i==1?[-14,0]:(i==2&&innerWidth<640?[0,14]:[14,0]),className:'lbl'});m.on('click',()=>pick(i,true));_mk.push(m)});
+ map.fitBounds(L.latLngBounds(P.map(p=>p.c)).pad(innerWidth<640?.55:.3));}
+// langue mémorisée
+try{const l=localStorage.getItem('pl-lang');if(l=='en')setLang('en')}catch(e){}
+})();
 </script>
-</body></html>
+</body>
+</html>

@@ -1,8 +1,11 @@
-# Proline Logistics · maquettes de site (médium et premium)
+# Proline Logistics · maquette de site (version premium)
 
-Maquettes de proposition préparées par Mstudio. **Non publiées ni validées par Proline Logistics.** Pages en `noindex`.
+Maquette proposée par Yelema, non publiée, non validée par Proline Logistics. Ne pas diffuser sans accord écrit de la marque.
 
-- Textes et chiffres : repris de prolinelogistic.com (accueil, services, entreprise, implantations, contact), relevé du 28/10/2026, à reconfirmer.
-- Photos : site de Proline Logistics ; port d'Abidjan par Farid Mernissi (CC BY-SA 4.0) et Romain Seaf (CC BY-SA 2.0), Wikimedia Commons.
-- Polices : Space Grotesk et Inter (Google Fonts, licence OFL).
-- Formulaire de contact non branché. Aucun numéro WhatsApp publié par la marque.
+- En ligne (non référencée, noindex) : https://leslita06.github.io/proline-maquette/premium/ ; la racine redirige vers cette page.
+- Textes et chiffres : uniquement prolinelogistic.com (relevé du 02/11/2026).
+- Vidéo d'accueil : boucle muette tirée du film de marque Proline du 02/11/2026 ; plans d'ambiance Pexels (licence Pexels), photos Proline issues du site.
+- Photo du port : Farid Mernissi, CC BY-SA 4.0, Wikimedia Commons.
+- Carte : OpenStreetMap ; emplacement des parcs indiqué par quartier.
+- Suivi d'expédition, WhatsApp et formulaire de devis : démonstration, non branchés.
+- Polices : Space Grotesk et Inter (OFL).
